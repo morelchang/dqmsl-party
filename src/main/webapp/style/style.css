@@ -1,0 +1,45 @@
+div {
+    margin: 0px;
+    padding: 0px;
+    border: 0px;
+}
+.table {
+    display: table;
+    border-collapse: collapse;
+    width: 100%;
+}
+.table-tr {
+    display: table-row;
+}
+.table-tr>div {
+    border: 1px solid #999;
+    padding: 5px;
+    display: table-cell;
+    text-align: left;
+    vertical-align: middle;
+}
+.btn {
+    color: #428bca;
+    position: relative;
+    width: auto;
+    display: inline-block;
+    margin: 0 0 2px;
+    overflow: hidden;
+    border: 1px solid #e5e5e5;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    white-space: nowrap;
+    padding: 6px 12px;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.search-input {
+    margin: 0 0 20px 0;
+}
+
+.moster-icon-small {
+    width: 60px;
+    height: 60px;
+}
