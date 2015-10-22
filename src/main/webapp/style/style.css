@@ -1,3 +1,6 @@
+/* 
+ * general class
+ */
 div {
     margin: 0px;
     padding: 0px;
@@ -35,6 +38,9 @@ div {
     text-decoration: none;
 }
 
+/*
+ * search class
+ */
 .search-input {
     margin: 0 0 20px 0;
 }
@@ -42,4 +48,12 @@ div {
 .moster-icon-small {
     width: 60px;
     height: 60px;
+}
+
+/*
+ * ranch class
+ */
+.ranch-item {
+    display: inline-block;
+    margin: 3px;
 }
