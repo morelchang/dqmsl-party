@@ -1,37 +1,47 @@
+function Mon(json) {
+    _.extend(this, json);
+    var r = this;
+    r.icon = 'http://dqmsl-search.net' + json.icon;
+    r.off = json.offense;
+    r.def = json.defense;
+    r.dex = json.dexterity;
+    r.int = json.intelligent;
+    r.rank = json.rank.name;
+    r.type = json.type.name;
+    r.system = json.system.name;
+    // formating resistances
+    r.resist = {};
+    _.each(json.resistances['@keys'], function(resistType, index) {
+        var resistName = resistType.name;
+        var resistItem = json.resistances['@items'][index];
+        if (resistItem['@ref']) {
+            resistItem = _.findWhere(json.resistances['@items'], {'@id': resistItem['@ref']});
+        }
+        r.resist[resistName] = resistItem.name;
+    });
+};
+
+Mon.prototype.star = function(n) {
+    // TODO: implement N stars status
+};
+
 var app = angular.module('partyApp', [])
     .factory('partyService', function() {
-        // TODO: create a service to encapsulate logic, eg: search monster
-        var partyService = {
+        return {
+            monsterFromPartyFetchJson: function(json) {
+                var r = new Mon(json);
+                return r;
+            },
             search: function(no) {
+                var service = this;
                 var mon;
                 $.ajax({
                         url: 'https://raw.githubusercontent.com/morelchang/dqmsl-party/master/data/monster-' + no + '.json',
                         dataType: 'json',
-                        async: false,
+                        async: false
                     })
                     .done(function(data) {
-                        // formating basic values
-                        var r = data;
-                        r.icon = 'http://dqmsl-search.net' + r.icon;
-                        r.off = r.offense;
-                        r.def = r.defense;
-                        r.dex = r.dexterity;
-                        r.int = r.intelligent;
-                        r.rank = r.rank.name;
-                        r.type = r.type.name;
-                        r.system = r.system.name;
-                        // formating resistances
-                        r.resist = {};
-                        _.each(r.resistances['@keys'], function(resistType, index) {
-                            var resistName = resistType.name;
-                            var resistItem = r.resistances['@items'][index];
-                            if (resistItem['@ref']) {
-                                resistItem = _.findWhere(r.resistances['@items'], {'@id': resistItem['@ref']});
-                            }
-                            r.resist[resistName] = resistItem.name;
-                        });
-
-                        mon = r;
+                        mon = service.monsterFromPartyFetchJson(data);
                     })
                     .fail(function(jqXHR, textStatus) {
                         console.log('failed to get data: ' + jqXHR.responseText);
@@ -39,7 +49,6 @@ var app = angular.module('partyApp', [])
                     return mon;
                 }
         };
-        return partyService;
     })
     .controller('searchMonsterController', ['$scope', 'partyService', function($scope, partyService) {
         $scope.search = function() {
