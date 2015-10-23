@@ -11,7 +11,7 @@
     <!-- search input section -->
     <div class="search-section" ng-controller="searchMonsterController">
       <div class="search-input">
-        Monster No: <input type="text" value="monster number" ng-model="searchNo" />
+        Monster No: <input type="text" value="monster number" ng-model="searchNo" ng-enter="search()" />
         <a class="btn" ng-click="search()">Search</a>
       </div>
 

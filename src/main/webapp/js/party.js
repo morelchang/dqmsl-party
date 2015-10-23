@@ -67,6 +67,18 @@ function Mobi(mon, stars) {
 }
 
 var app = angular.module('partyApp', [])
+    .directive('ngEnter', function() {
+        return function(scope, elem, attrs) {
+            elem.bind('keydown keypress', function(event) {
+                if (event.which === 13) {
+                    scope.$apply(function() {
+                        scope.$eval(attrs.ngEnter);
+                    });
+                    event.preventDefault();
+                }
+            });
+        };
+    })
     .service('partyService', function() {
         this.monsterFromPartyFetchJson = function(json) {
             var r = new Mon(json);
