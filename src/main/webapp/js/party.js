@@ -86,37 +86,88 @@ var app = angular.module('partyApp', [])
         };
         this.search = function(no) {
             var service = this;
-            var mon;
+            var dfd = $.Deferred();
+            // TODO: angularjs way to fetch?
             $.ajax({
                 url: 'https://raw.githubusercontent.com/morelchang/dqmsl-party/master/data/monster-' + no + '.json',
                 dataType: 'json',
                 async: false
             })
             .done(function(data) {
-                mon = Mon.parsePartyFetchJson(data);
+                var mon = Mon.parsePartyFetchJson(data);
+                dfd.resolve(mon);
             })
             .fail(function(jqXHR, textStatus) {
                 console.log('failed to get data: ' + jqXHR.responseText);
+                dfd.reject(jqXHR.responseText);
             });
-            return mon;
+
+            return dfd;
+        };
+        this.searchMultiple = function(values) {
+            if (!_.contains(values, ',')) {
+                return this.search(values);
+            }
+
+            var dfd = $.Deferred();
+            values = values.replace(/^\s*(.*)\s*/g, '$1');
+            values = values.split(/\s*,\s*/);
+            var service = this;
+            var result = [];
+            _.each(values, function(no, idx) {
+                if (!no) {
+                    return;
+                }
+                service.search(no).done(function(mo) {
+                    result.push(mo);
+                    if (idx === values.length - 1) {
+                        dfd.resolve(result);
+                    }
+                });
+            });
+            return dfd;
         };
     })
     .controller('searchMonsterController', ['$scope', 'partyService', function($scope, partyService) {
         $scope.search = function() {
             // cleanup
-            $scope.error = '';
+            this.error = '';
 
             // read from json data
-            var mon = partyService.search(this.searchNo);
-            if (mon) {
-                // render to search result section
-                $scope.result = mon;
-                return;
-            }
+            partyService.search(this.searchNo)
+                .done(function(mon) {
+                    if (mon) {
+                        // render to search result section
+                        $scope.result = mon;
+                        return;
+                    }
+                }).fail(function(error) {
+                    $scope.result = null;
+                    $scope.error = 'search failed:' + error;
+                });
+        };
+        $scope.searchMultiple = function() {
+            // cleanup
+            this.error = '';
 
-            $scope.result = null;
-            $scope.error = 'not found';
-        }; 
+            // read from json data
+            partyService.searchMultiple(this.searchNo)
+                .done(function(mons) {
+                    if (mons.length > 0) {
+                        // render to search result section
+                        $scope.results = mons;
+                        return;
+                    }
+                });
+        };
+        $scope.saveResult = function() {
+            $.cookie('searchNo', this.searchNo);
+            this.error = 'result saved';
+        }
+        $scope.loadSaved = function() {
+            this.searchNo = $.cookie('searchNo');
+            this.searchMultiple();
+        }
     }])
     .controller('ranchController', ['$scope', function($s) {
         this.monsters = {};
