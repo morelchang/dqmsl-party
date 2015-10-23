@@ -3,7 +3,17 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
     <script src="js/party.js" ></script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    
+      ga('create', 'UA-924104-6', 'auto');
+      ga('send', 'pageview');
+    </script>
     <link rel="stylesheet" type="text/css" href="style/style.css">
   </head>
   <body ng-app="partyApp">
@@ -11,42 +21,44 @@
     <!-- search input section -->
     <div class="search-section" ng-controller="searchMonsterController">
       <div class="search-input">
-        Monster No: <input type="text" value="monster number" ng-model="searchNo" ng-enter="search()" />
-        <a class="btn" ng-click="search()">Search</a>
+        Monster No: <input type="text" value="monster number" ng-model="searchNo" ng-enter="searchMultiple()" />
+        <a class="btn" ng-click="searchMultiple()">Search</a>
+        <a class="btn" ng-click="saveResult()">Save Result</a>
+        <a class="btn" ng-click="loadSaved()">Load Saved</a>
       </div>
 
       <!-- search error -->
       <div class="search-error" ng-hide="!error">{{error}}</div>
 
       <!-- search result -->
-      <div class="search-result table" ng-hide="!result">
+      <div class="search-result table" ng-hide="!results">
         <div class="table-tr">
           <div></div>
           <div></div>
-          <div>HP</div>
-          <div>MP</div>
-          <div>ATT</div>
-          <div>DEF</div>
-          <div>DEX</div>
-          <div>INT</div>
-          <div>Total</div>
-          <div>Fire</div>
-          <div>Ice</div>
-          <div>Thander</div>
-          <div>Wind</div>
-          <div>Explode</div>
-          <div>Light</div>
-          <div>Dark</div>
-          <div>Death</div>
-          <div>Inmagic</div>
-          <div>Miss</div>
-          <div>Toxic</div>
-          <div>Sleep</div>
-          <div>Confusion</div>
-          <div>Stop</div>
-          <div>Inbreath</div>
+          <div><a href="#" ng-click="sort('hp')">HP</a></div>
+          <div><a href="#" ng-click="sort('mp')">MP</a></div>
+          <div><a href="#" ng-click="sort('att')">ATT</a></div>
+          <div><a href="#" ng-click="sort('def')">DEF</a></div>
+          <div><a href="#" ng-click="sort('dex')">DEX</a></div>
+          <div><a href="#" ng-click="sort('int')">INT</a></div>
+          <div><a href="#" ng-click="sort('total')">Total</a></div>
+          <div><a href="#" ng-click="sort('')">Fire</a></div>
+          <div><a href="#" ng-click="sort('')">Ice</a></div>
+          <div><a href="#" ng-click="sort('')">Thander</a></div>
+          <div><a href="#" ng-click="sort('')">Wind</a></div>
+          <div><a href="#" ng-click="sort('')">Explode</a></div>
+          <div><a href="#" ng-click="sort('')">Light</a></div>
+          <div><a href="#" ng-click="sort('')">Dark</a></div>
+          <div><a href="#" ng-click="sort('')">Death</a></div>
+          <div><a href="#" ng-click="sort('')">Inmagic</a></div>
+          <div><a href="#" ng-click="sort('')">Miss</a></div>
+          <div><a href="#" ng-click="sort('')">Toxic</a></div>
+          <div><a href="#" ng-click="sort('')">Sleep</a></div>
+          <div><a href="#" ng-click="sort('')">Confusion</a></div>
+          <div><a href="#" ng-click="sort('')">Stop</a></div>
+          <div><a href="#" ng-click="sort('')">Inbreath</a></div>
         </div>
-        <div class="table-tr">
+        <div class="table-tr" ng-repeat="result in results">
           <div>
             <div ng-class="{'star-icon0': result.stars <= 0, 'star-icon1': result.stars === 1, 'star-icon2': result.stars === 2, 'star-icon3': result.stars === 3, 'star-icon4': result.stars === 4}"><img class="moster-icon-small" ng-src="{{result.icon}}"></div>
           </div>
@@ -54,11 +66,11 @@
               No: {{result.no}}<br/>
               Name: {{result.name}}<br/>
               Stars:
-              <a href="#" ng-class="{'star-on': result.stars <= 0}" ng-click="result.withStars(0)">[0]</a>
-              <a href="#" ng-class="{'star-on': result.stars === 1}" ng-click="result.withStars(1)">[1]</a> 
-              <a href="#" ng-class="{'star-on': result.stars === 2}" ng-click="result.withStars(2)">[2]</a> 
-              <a href="#" ng-class="{'star-on': result.stars === 3}" ng-click="result.withStars(3)">[3]</a> 
-              <a href="#" ng-class="{'star-on': result.stars === 4}" ng-click="result.withStars(4)">[4]</a>
+              <a href="#" ng-class="{'star-on': result.stars <= 0}" ng-click="changeStars($index, 0)">[0]</a>
+              <a href="#" ng-class="{'star-on': result.stars === 1}" ng-click="changeStars($index, 1)">[1]</a> 
+              <a href="#" ng-class="{'star-on': result.stars === 2}" ng-click="changeStars($index, 2)">[2]</a> 
+              <a href="#" ng-class="{'star-on': result.stars === 3}" ng-click="changeStars($index, 3)">[3]</a> 
+              <a href="#" ng-class="{'star-on': result.stars === 4}" ng-click="changeStars($index, 4)">[4]</a>
           </div>
           <div>{{result.hp}}</div>
           <div>{{result.mp}}</div>
@@ -66,22 +78,22 @@
           <div>{{result.def}}</div>
           <div>{{result.dex}}</div>
           <div>{{result.int}}</div>
-          <div>{{result.total}}</div>
-          <div>{{result.resist['FIRE']}}</div>
-          <div>{{result.resist['ICE']}}</div>
-          <div>{{result.resist['THANDER']}}</div>
-          <div>{{result.resist['WIND']}}</div>
-          <div>{{result.resist['EXPLODE']}}</div>
-          <div>{{result.resist['LIGHT']}}</div>
-          <div>{{result.resist['DARK']}}</div>
-          <div>{{result.resist['DEATH']}}</div>
-          <div>{{result.resist['INMAGIC']}}</div>
-          <div>{{result.resist['MISS']}}</div>
-          <div>{{result.resist['TOXIC']}}</div>
-          <div>{{result.resist['SLEEP']}}</div>
-          <div>{{result.resist['CONFUSION']}}</div>
-          <div>{{result.resist['STOP']}}</div>
-          <div>{{result.resist['INBREATH']}}</div>
+          <div style="text-align: right">{{result.total}}</div>
+          <div class="resist-{{result.resist['FIRE']}}">{{result.resist['FIRE']}}</div>
+          <div class="resist-{{result.resist['ICE']}}">{{result.resist['ICE']}}</div>
+          <div class="resist-{{result.resist['THANDER']}}">{{result.resist['THANDER']}}</div>
+          <div class="resist-{{result.resist['WIND']}}">{{result.resist['WIND']}}</div>
+          <div class="resist-{{result.resist['EXPLODE']}}">{{result.resist['EXPLODE']}}</div>
+          <div class="resist-{{result.resist['LIGHT']}}">{{result.resist['LIGHT']}}</div>
+          <div class="resist-{{result.resist['DARK']}}">{{result.resist['DARK']}}</div>
+          <div class="resist-{{result.resist['DEATH']}}">{{result.resist['DEATH']}}</div>
+          <div class="resist-{{result.resist['INMAGIC']}}">{{result.resist['INMAGIC']}}</div>
+          <div class="resist-{{result.resist['MISS']}}">{{result.resist['MISS']}}</div>
+          <div class="resist-{{result.resist['TOXIC']}}">{{result.resist['TOXIC']}}</div>
+          <div class="resist-{{result.resist['SLEEP']}}">{{result.resist['SLEEP']}}</div>
+          <div class="resist-{{result.resist['CONFUSION']}}">{{result.resist['CONFUSION']}}</div>
+          <div class="resist-{{result.resist['STOP']}}">{{result.resist['STOP']}}</div>
+          <div class="resist-{{result.resist['INBREATH']}}">{{result.resist['INBREATH']}}</div>
         </div>
       </div>
     </div>
