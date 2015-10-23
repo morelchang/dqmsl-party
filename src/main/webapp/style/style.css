@@ -50,6 +50,11 @@ div {
     height: 60px;
 }
 
+.search-result .star-on {
+    font-weight: bold;
+    font-size: larger;
+}
+
 /*
  * ranch class
  */

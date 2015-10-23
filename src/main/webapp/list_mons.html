@@ -22,14 +22,14 @@
       <div class="search-result table" ng-hide="!result">
         <div class="table-tr">
           <div></div>
-          <div>No</div>
-          <div>Name</div>
+          <div></div>
           <div>HP</div>
           <div>MP</div>
-          <div>OFF</div>
+          <div>ATT</div>
           <div>DEF</div>
           <div>DEX</div>
           <div>INT</div>
+          <div>Total</div>
           <div>Fire</div>
           <div>Ice</div>
           <div>Thander</div>
@@ -48,14 +48,23 @@
         </div>
         <div class="table-tr">
           <div><img class="moster-icon-small" ng-src="{{result.icon}}"></div>
-          <div>{{result.no}}</div>
-          <div>{{result.name}}</div>
+          <div>
+              No: {{result.no}}<br/>
+              Name: {{result.name}}<br/>
+              Stars:
+              <a href="#" ng-class="{'star-on': result.stars <= 0}" ng-click="result.withStars(0)">[0]</a>
+              <a href="#" ng-class="{'star-on': result.stars === 1}" ng-click="result.withStars(1)">[1]</a> 
+              <a href="#" ng-class="{'star-on': result.stars === 2}" ng-click="result.withStars(2)">[2]</a> 
+              <a href="#" ng-class="{'star-on': result.stars === 3}" ng-click="result.withStars(3)">[3]</a> 
+              <a href="#" ng-class="{'star-on': result.stars === 4}" ng-click="result.withStars(4)">[4]</a>
+          </div>
           <div>{{result.hp}}</div>
           <div>{{result.mp}}</div>
-          <div>{{result.off}}</div>
+          <div>{{result.att}}</div>
           <div>{{result.def}}</div>
           <div>{{result.dex}}</div>
           <div>{{result.int}}</div>
+          <div>{{result.total}}</div>
           <div>{{result.resist['FIRE']}}</div>
           <div>{{result.resist['ICE']}}</div>
           <div>{{result.resist['THANDER']}}</div>
