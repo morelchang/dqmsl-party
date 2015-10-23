@@ -47,7 +47,9 @@
           <div>Inbreath</div>
         </div>
         <div class="table-tr">
-          <div><img class="moster-icon-small" ng-src="{{result.icon}}"></div>
+          <div>
+            <div ng-class="{'star-icon0': result.stars <= 0, 'star-icon1': result.stars === 1, 'star-icon2': result.stars === 2, 'star-icon3': result.stars === 3, 'star-icon4': result.stars === 4}"><img class="moster-icon-small" ng-src="{{result.icon}}"></div>
+          </div>
           <div>
               No: {{result.no}}<br/>
               Name: {{result.name}}<br/>

@@ -21,7 +21,6 @@ Mon.prototype.calTotal = function() {
 
 Mon.prototype.fusion = function(fusionerValue, fusioneeValue) {
    var r = Math.ceil(fusionerValue / 50) + Math.ceil(fusioneeValue / 50);
-   console.log('reuslt=' + r + '(' + fusionerValue + '/50)+(' + fusioneeValue + '/50)=' + Math.ceil(fusionerValue / 50) + ' + ' + Math.ceil(fusioneeValue / 50));
    return r;
 }
 
