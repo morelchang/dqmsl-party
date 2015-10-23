@@ -1,6 +1,10 @@
 /* 
  * general class
  */
+body {
+    font-family: sans-serif;
+    font-size: 10pt;;
+}
 div {
     margin: 0px;
     padding: 0px;
@@ -45,6 +49,9 @@ div {
     margin: 0 0 20px 0;
 }
 
+/*
+ * monster display
+ */
 .moster-icon-small {
     width: 60px;
     height: 60px;
@@ -136,10 +143,27 @@ div {
     font-size: larger;
 }
 
-/*
- * ranch class
- */
-.ranch-item {
-    display: inline-block;
-    margin: 3px;
+.resist-REFLECT {
+    color: #A1A2A3;
+}
+.resist-ABSORB {
+    color: #AC5FE0;
+}
+.resist-VOID {
+    color: #7B0E0A;
+}
+.resist-HELF {
+    color: #E46615;
+}
+.resist-LOT {
+    color: #FD4417;
+}
+.resist-LITTLE {
+    color: #EF9410;
+}
+.resist-WEEK {
+    color: #159BCB;
+}
+.resist-VERY_WEEK {
+    color: #41B1D0;
 }

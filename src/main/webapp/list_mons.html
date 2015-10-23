@@ -26,28 +26,28 @@
         <div class="table-tr">
           <div></div>
           <div></div>
-          <div>HP</div>
-          <div>MP</div>
-          <div>ATT</div>
-          <div>DEF</div>
-          <div>DEX</div>
-          <div>INT</div>
-          <div>Total</div>
-          <div>Fire</div>
-          <div>Ice</div>
-          <div>Thander</div>
-          <div>Wind</div>
-          <div>Explode</div>
-          <div>Light</div>
-          <div>Dark</div>
-          <div>Death</div>
-          <div>Inmagic</div>
-          <div>Miss</div>
-          <div>Toxic</div>
-          <div>Sleep</div>
-          <div>Confusion</div>
-          <div>Stop</div>
-          <div>Inbreath</div>
+          <div><a href="#" ng-click="sort('hp')">HP</a></div>
+          <div><a href="#" ng-click="sort('mp')">MP</a></div>
+          <div><a href="#" ng-click="sort('att')">ATT</a></div>
+          <div><a href="#" ng-click="sort('def')">DEF</a></div>
+          <div><a href="#" ng-click="sort('dex')">DEX</a></div>
+          <div><a href="#" ng-click="sort('int')">INT</a></div>
+          <div><a href="#" ng-click="sort('total')">Total</a></div>
+          <div><a href="#" ng-click="sort('')">Fire</a></div>
+          <div><a href="#" ng-click="sort('')">Ice</a></div>
+          <div><a href="#" ng-click="sort('')">Thander</a></div>
+          <div><a href="#" ng-click="sort('')">Wind</a></div>
+          <div><a href="#" ng-click="sort('')">Explode</a></div>
+          <div><a href="#" ng-click="sort('')">Light</a></div>
+          <div><a href="#" ng-click="sort('')">Dark</a></div>
+          <div><a href="#" ng-click="sort('')">Death</a></div>
+          <div><a href="#" ng-click="sort('')">Inmagic</a></div>
+          <div><a href="#" ng-click="sort('')">Miss</a></div>
+          <div><a href="#" ng-click="sort('')">Toxic</a></div>
+          <div><a href="#" ng-click="sort('')">Sleep</a></div>
+          <div><a href="#" ng-click="sort('')">Confusion</a></div>
+          <div><a href="#" ng-click="sort('')">Stop</a></div>
+          <div><a href="#" ng-click="sort('')">Inbreath</a></div>
         </div>
         <div class="table-tr" ng-repeat="result in results">
           <div>
@@ -57,11 +57,11 @@
               No: {{result.no}}<br/>
               Name: {{result.name}}<br/>
               Stars:
-              <a href="#" ng-class="{'star-on': result.stars <= 0}" ng-click="result.withStars(0)">[0]</a>
-              <a href="#" ng-class="{'star-on': result.stars === 1}" ng-click="result.withStars(1)">[1]</a> 
-              <a href="#" ng-class="{'star-on': result.stars === 2}" ng-click="result.withStars(2)">[2]</a> 
-              <a href="#" ng-class="{'star-on': result.stars === 3}" ng-click="result.withStars(3)">[3]</a> 
-              <a href="#" ng-class="{'star-on': result.stars === 4}" ng-click="result.withStars(4)">[4]</a>
+              <a href="#" ng-class="{'star-on': result.stars <= 0}" ng-click="changeStars($index, 0)">[0]</a>
+              <a href="#" ng-class="{'star-on': result.stars === 1}" ng-click="changeStars($index, 1)">[1]</a> 
+              <a href="#" ng-class="{'star-on': result.stars === 2}" ng-click="changeStars($index, 2)">[2]</a> 
+              <a href="#" ng-class="{'star-on': result.stars === 3}" ng-click="changeStars($index, 3)">[3]</a> 
+              <a href="#" ng-class="{'star-on': result.stars === 4}" ng-click="changeStars($index, 4)">[4]</a>
           </div>
           <div>{{result.hp}}</div>
           <div>{{result.mp}}</div>
@@ -70,21 +70,21 @@
           <div>{{result.dex}}</div>
           <div>{{result.int}}</div>
           <div style="text-align: right">{{result.total}}</div>
-          <div>{{result.resist['FIRE']}}</div>
-          <div>{{result.resist['ICE']}}</div>
-          <div>{{result.resist['THANDER']}}</div>
-          <div>{{result.resist['WIND']}}</div>
-          <div>{{result.resist['EXPLODE']}}</div>
-          <div>{{result.resist['LIGHT']}}</div>
-          <div>{{result.resist['DARK']}}</div>
-          <div>{{result.resist['DEATH']}}</div>
-          <div>{{result.resist['INMAGIC']}}</div>
-          <div>{{result.resist['MISS']}}</div>
-          <div>{{result.resist['TOXIC']}}</div>
-          <div>{{result.resist['SLEEP']}}</div>
-          <div>{{result.resist['CONFUSION']}}</div>
-          <div>{{result.resist['STOP']}}</div>
-          <div>{{result.resist['INBREATH']}}</div>
+          <div class="resist-{{result.resist['FIRE']}}">{{result.resist['FIRE']}}</div>
+          <div class="resist-{{result.resist['ICE']}}">{{result.resist['ICE']}}</div>
+          <div class="resist-{{result.resist['THANDER']}}">{{result.resist['THANDER']}}</div>
+          <div class="resist-{{result.resist['WIND']}}">{{result.resist['WIND']}}</div>
+          <div class="resist-{{result.resist['EXPLODE']}}">{{result.resist['EXPLODE']}}</div>
+          <div class="resist-{{result.resist['LIGHT']}}">{{result.resist['LIGHT']}}</div>
+          <div class="resist-{{result.resist['DARK']}}">{{result.resist['DARK']}}</div>
+          <div class="resist-{{result.resist['DEATH']}}">{{result.resist['DEATH']}}</div>
+          <div class="resist-{{result.resist['INMAGIC']}}">{{result.resist['INMAGIC']}}</div>
+          <div class="resist-{{result.resist['MISS']}}">{{result.resist['MISS']}}</div>
+          <div class="resist-{{result.resist['TOXIC']}}">{{result.resist['TOXIC']}}</div>
+          <div class="resist-{{result.resist['SLEEP']}}">{{result.resist['SLEEP']}}</div>
+          <div class="resist-{{result.resist['CONFUSION']}}">{{result.resist['CONFUSION']}}</div>
+          <div class="resist-{{result.resist['STOP']}}">{{result.resist['STOP']}}</div>
+          <div class="resist-{{result.resist['INBREATH']}}">{{result.resist['INBREATH']}}</div>
         </div>
       </div>
     </div>
