@@ -206,32 +206,54 @@ var app = angular.module('partyApp', ['pascalprecht.translate'])
             save = save.substring(0, save.length - 1);
             
             // persist to cookie
-            if (Storage) {
-                window.localStorage.setItem('save', save);
-                if (this.sortBy) {
-                    window.localStorage.setItem('save-sortBy', this.sortBy);
-                }
-            } else {
-                $.cookie('save', save);
-                if (this.sortBy) {
-                    $.cookie('save-sortBy', this.sortBy);
-                }
+            this.persist('save', save);
+            if (this.sortBy) {
+                this.persist('save-sortBy', this.sortBy);
             }
-
             this.error = 'result saved';
-        }
+        };
         $scope.loadSaved = function() {
-            var save;
-            if (Storage) {
-                this.searchNo = window.localStorage.getItem('save');
-                this.sortBy = window.localStorage.getItem('save-sortBy');
-            } else {
-                this.searchNo = $.cookie('save');
-                this.sortBy = $.cookie('save-sortBy');
-            }
-
+            this.searchNo = this.readPersist('save');
+            this.sortBy = this.readPersist('save-sortBy');
             this.searchMultiple();
-        }
+        };
+        $scope.addToSaved = function() {
+            var newMons = this.results;
+
+            // read from json data
+            var persistRanch = this.readPersist('save');
+            partyService.searchMultiple(persistRanch)
+                .done(function(mons) {
+                    // render to search result section
+                    $scope.results = _.extend(mons, newMons);
+                    $scope.sort();
+                    $scope.saveResult();
+
+                    $translate('added success:').then(function(t) {
+                        $scope.error = t + newMons.length;
+                    });
+                }).fail(function(error) {
+                    $translate('search failed:').then(function(t) {
+                        $scope.error = t + error;
+                    });
+                }).always(function() {
+                    $scope.$apply();
+                });
+        };
+        $scope.readPersist = function(key) {
+            if (Storage) {
+                return window.localStorage.getItem(key);
+            } else {
+                return $.cookie(key);
+            }
+        };
+        $scope.persist = function(key, value) {
+            if (Storage) {
+                window.localStorage.setItem(key, value);
+            } else {
+                $.cookie(key, value);
+            }
+        };
     }])
     .controller('ranchController', ['$scope', function($s) {
         this.monsters = {};

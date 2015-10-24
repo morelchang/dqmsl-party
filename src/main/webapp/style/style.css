@@ -165,26 +165,34 @@ div {
 }
 
 .resist-REFLECT {
+    font-weight: bold;
     color: #A1A2A3;
 }
 .resist-ABSORB {
+    font-weight: bold;
     color: #AC5FE0;
 }
 .resist-VOID {
+    font-weight: bold;
     color: #FF2011;
 }
 .resist-HELF {
-    color: #E46615;
+    font-weight: bold;
+    color: #FF6B16;
 }
 .resist-LOT {
+    font-weight: bold;
     color: #FD4417;
 }
 .resist-LITTLE {
+    font-weight: bold;
     color: #EF9410;
 }
 .resist-WEEK {
+    font-weight: bold;
     color: #159BCB;
 }
 .resist-VERY_WEEK {
+    font-weight: bold;
     color: #41B1D0;
 }
