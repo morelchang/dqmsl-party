@@ -41,12 +41,33 @@ div {
     font-size: 14px;
     text-decoration: none;
 }
+.btn:hover {
+    background-color: #a2dbff;
+    transition: 0.25s;
+}
+.btn:active {
+    color: #a2fbff;
+    background-color: #226baa;
+    transition: 0.01s;
+}
 
 /*
  * search class
  */
 .search-input {
     margin: 0 0 20px 0;
+}
+.sorting::after {
+    content: ' \025BC';
+    display: inline;
+    font-size: x-small;
+    color: #888888;
+}
+.sorting.asc::after {
+    content: ' \025B2';
+    display: inline;
+    font-size: x-small;
+    color: #888888;
 }
 
 /*

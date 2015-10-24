@@ -158,6 +158,7 @@ var app = angular.module('partyApp', [])
                 }).always(function() {
                     $scope.$apply();
                 });
+            this.sort();
         };
         $scope.changeStars = function (index, stars) {
             this.results[index].withStars(stars);
@@ -167,11 +168,13 @@ var app = angular.module('partyApp', [])
             // reverse order if sort same column again
             if (by && this.sortBy === by) {
                 this.results.reverse();
+                this.sortByAsc = this.sortByAsc ? !this.sortByAsc : true;
                 return;
             }
 
             // sort by column argument in order: by -> this.sortBy -> 'no'
             this.sortBy =  by ? by : (this.sortBy ? this.sortBy : 'no');
+            this.sortByAsc = false;
             // sorting
             var sortBy = this.sortBy;
             this.results.sort(function(a, b) {
@@ -179,11 +182,38 @@ var app = angular.module('partyApp', [])
             });
         };
         $scope.saveResult = function() {
-            $.cookie('searchNo', this.searchNo);
+            // make result into save format
+            var save = '';
+            _.each(this.results, function(r) {
+                save += r.no + (r.stars > 0 ? '[' + r.stars + '],' : ',');
+            });
+            save = save.substring(0, save.length - 1);
+            
+            // persist to cookie
+            if (Storage) {
+                window.localStorage.setItem('save', save);
+                if (this.sortBy) {
+                    window.localStorage.setItem('save-sortBy', this.sortBy);
+                }
+            } else {
+                $.cookie('save', save);
+                if (this.sortBy) {
+                    $.cookie('save-sortBy', this.sortBy);
+                }
+            }
+
             this.error = 'result saved';
         }
         $scope.loadSaved = function() {
-            this.searchNo = $.cookie('searchNo');
+            var save;
+            if (Storage) {
+                this.searchNo = window.localStorage.getItem('save');
+                this.sortBy = window.localStorage.getItem('save-sortBy');
+            } else {
+                this.searchNo = $.cookie('save');
+                this.sortBy = $.cookie('save-sortBy');
+            }
+
             this.searchMultiple();
         }
     }])
