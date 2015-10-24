@@ -74,7 +74,10 @@ var app = angular.module('partyApp', ['pascalprecht.translate'])
             prefix: 'lang/',
             suffix: '.json'
         });
-        $translateProvider.determinePreferredLanguage();
+        $translateProvider.registerAvailableLanguageKeys(['en', 'zh'], {
+            'en_*': 'en',
+            'zh_*': 'zh'
+        }).determinePreferredLanguage();
     })
     .directive('ngEnter', function() {
         return function(scope, elem, attrs) {
@@ -138,7 +141,7 @@ var app = angular.module('partyApp', ['pascalprecht.translate'])
             return dfd;
         };
     })
-    .controller('searchMonsterController', ['$scope', 'partyService', function($scope, partyService) {
+    .controller('searchMonsterController', ['$scope', 'partyService', '$translate', function($scope, partyService, $translate) {
         $scope.searchMultiple = function() {
             // cleanup
             this.error = '';
@@ -153,16 +156,22 @@ var app = angular.module('partyApp', ['pascalprecht.translate'])
                 .done(function(mons) {
                     if (!mons.length) {
                         $scope.result = null;
-                        $scope.error = 'search result:0';
+                        $translate('search result:').then(function(t) {
+                            $scope.error = t + '0';
+                        });
                         return;
                     }
                     // render to search result section
-                    $scope.error = 'search result:' + mons.length;
+                    $translate('search result:').then(function(t) {
+                        $scope.error = t + mons.length;
+                    });
                     $scope.results = mons;
                     $scope.sort();
                 }).fail(function(error) {
                     $scope.result = null;
-                    $scope.error = 'search failed:' + error;
+                    $translate('search failed:').then(function(t) {
+                        $scope.error = t + error;
+                    });
                 }).always(function() {
                     $scope.$apply();
                 });

@@ -24,10 +24,10 @@
     <!-- search input section -->
     <div class="search-section" ng-controller="searchMonsterController">
       <div class="search-input">
-        Monster No: <input type="text" value="monster number" ng-model="searchNo" ng-enter="searchMultiple()" />
-        <a class="btn" ng-click="searchMultiple()">Search</a>
-        <a class="btn" ng-click="saveResult()">Save Result</a>
-        <a class="btn" ng-click="loadSaved()">Load Saved</a>
+        {{'Monster No:' | translate}} <input type="text" value="monster number" ng-model="searchNo" ng-enter="searchMultiple()" />
+        <a class="btn" ng-click="searchMultiple()">{{'Search' | translate}}</a>
+        <a class="btn" ng-click="saveResult()">{{'Save Result' | translate}}</a>
+        <a class="btn" ng-click="loadSaved()">{{'Load Saved' | translate}}</a>
       </div>
 
       <!-- search error -->
@@ -40,35 +40,34 @@
           <div></div>
           <div><a href="#" ng-class="{'sorting': sortBy === 'hp'   , 'asc': sortByAsc}" ng-click="sort('hp')">HP</a></div>
           <div><a href="#" ng-class="{'sorting': sortBy === 'mp'   , 'asc': sortByAsc}" ng-click="sort('mp')">MP</a></div>
-          <div><a href="#" ng-class="{'sorting': sortBy === 'att'  , 'asc': sortByAsc}" ng-click="sort('att')">ATT</a></div>
-          <div><a href="#" ng-class="{'sorting': sortBy === 'def'  , 'asc': sortByAsc}" ng-click="sort('def')">DEF</a></div>
-          <div><a href="#" ng-class="{'sorting': sortBy === 'dex'  , 'asc': sortByAsc}" ng-click="sort('dex')">DEX</a></div>
-          <div><a href="#" ng-class="{'sorting': sortBy === 'int'  , 'asc': sortByAsc}" ng-click="sort('int')">INT</a></div>
-          <div><a href="#" ng-class="{'sorting': sortBy === 'total', 'asc': sortByAsc}" ng-click="sort('total')">Total</a></div>
-          <div><a href="#" ng-click="sort('')">Fire</a></div>
-          <div><a href="#" ng-click="sort('')">Ice</a></div>
-          <div><a href="#" ng-click="sort('')">Thander</a></div>
-          <div><a href="#" ng-click="sort('')">Wind</a></div>
-          <div><a href="#" ng-click="sort('')">Explode</a></div>
-          <div><a href="#" ng-click="sort('')">Light</a></div>
-          <div><a href="#" ng-click="sort('')">Dark</a></div>
-          <div><a href="#" ng-click="sort('')">Death</a></div>
-          <div><a href="#" ng-click="sort('')">Inmagic</a></div>
-          <div><a href="#" ng-click="sort('')">Miss</a></div>
-          <div><a href="#" ng-click="sort('')">Toxic</a></div>
-          <div><a href="#" ng-click="sort('')">Sleep</a></div>
-          <div><a href="#" ng-click="sort('')">Confusion</a></div>
-          <div><a href="#" ng-click="sort('')">Stop</a></div>
-          <div><a href="#" ng-click="sort('')">Inbreath</a></div>
+          <div><a href="#" ng-class="{'sorting': sortBy === 'att'  , 'asc': sortByAsc}" ng-click="sort('att')">{{'ATT' | translate}}</a></div>
+          <div><a href="#" ng-class="{'sorting': sortBy === 'def'  , 'asc': sortByAsc}" ng-click="sort('def')">{{'DEF' | translate}}</a></div>
+          <div><a href="#" ng-class="{'sorting': sortBy === 'dex'  , 'asc': sortByAsc}" ng-click="sort('dex')">{{'DEX' | translate}}</a></div>
+          <div><a href="#" ng-class="{'sorting': sortBy === 'int'  , 'asc': sortByAsc}" ng-click="sort('int')">{{'INT' | translate}}</a></div>
+          <div><a href="#" ng-class="{'sorting': sortBy === 'total', 'asc': sortByAsc}" ng-click="sort('total')">{{'Total' | translate}}</a></div>
+          <div><a href="#" ng-click="sort('')">{{'Fire' | translate}}</a></div>
+          <div><a href="#" ng-click="sort('')">{{'Ice' | translate}}</a></div>
+          <div><a href="#" ng-click="sort('')">{{'Thander' | translate}}</a></div>
+          <div><a href="#" ng-click="sort('')">{{'Wind' | translate}}</a></div>
+          <div><a href="#" ng-click="sort('')">{{'Explode' | translate}}</a></div>
+          <div><a href="#" ng-click="sort('')">{{'Light' | translate}}</a></div>
+          <div><a href="#" ng-click="sort('')">{{'Dark' | translate}}</a></div>
+          <div><a href="#" ng-click="sort('')">{{'Death' | translate}}</a></div>
+          <div><a href="#" ng-click="sort('')">{{'Inmagic' | translate}}</a></div>
+          <div><a href="#" ng-click="sort('')">{{'Miss' | translate}}</a></div>
+          <div><a href="#" ng-click="sort('')">{{'Toxic' | translate}}</a></div>
+          <div><a href="#" ng-click="sort('')">{{'Sleep' | translate}}</a></div>
+          <div><a href="#" ng-click="sort('')">{{'Confusion' | translate}}</a></div>
+          <div><a href="#" ng-click="sort('')">{{'Stop' | translate}}</a></div>
+          <div><a href="#" ng-click="sort('')">{{'Inbreath' | translate}}</a></div>
         </div>
         <div class="table-tr" ng-repeat="result in results">
           <div>
             <div ng-class="{'star-icon0': result.stars <= 0, 'star-icon1': result.stars === 1, 'star-icon2': result.stars === 2, 'star-icon3': result.stars === 3, 'star-icon4': result.stars === 4}"><img class="moster-icon-small" ng-src="{{result.icon}}"></div>
           </div>
           <div>
-              No: {{result.no}}<br/>
-              Name: {{result.name}}<br/>
-              Stars:
+              {{'No:' | translate}} {{result.no}}<br/>
+              {{result.name}}<br/>
               <a href="#" ng-class="{'star-on': result.stars <= 0}" ng-click="changeStars($index, 0)">[0]</a>
               <a href="#" ng-class="{'star-on': result.stars === 1}" ng-click="changeStars($index, 1)">[1]</a> 
               <a href="#" ng-class="{'star-on': result.stars === 2}" ng-click="changeStars($index, 2)">[2]</a> 
@@ -82,21 +81,21 @@
           <div>{{result.dex}}</div>
           <div>{{result.int}}</div>
           <div style="text-align: right">{{result.total}}</div>
-          <div class="resist-{{result.resist['FIRE']}}">{{result.resist['FIRE']}}</div>
-          <div class="resist-{{result.resist['ICE']}}">{{result.resist['ICE']}}</div>
-          <div class="resist-{{result.resist['THANDER']}}">{{result.resist['THANDER']}}</div>
-          <div class="resist-{{result.resist['WIND']}}">{{result.resist['WIND']}}</div>
-          <div class="resist-{{result.resist['EXPLODE']}}">{{result.resist['EXPLODE']}}</div>
-          <div class="resist-{{result.resist['LIGHT']}}">{{result.resist['LIGHT']}}</div>
-          <div class="resist-{{result.resist['DARK']}}">{{result.resist['DARK']}}</div>
-          <div class="resist-{{result.resist['DEATH']}}">{{result.resist['DEATH']}}</div>
-          <div class="resist-{{result.resist['INMAGIC']}}">{{result.resist['INMAGIC']}}</div>
-          <div class="resist-{{result.resist['MISS']}}">{{result.resist['MISS']}}</div>
-          <div class="resist-{{result.resist['TOXIC']}}">{{result.resist['TOXIC']}}</div>
-          <div class="resist-{{result.resist['SLEEP']}}">{{result.resist['SLEEP']}}</div>
-          <div class="resist-{{result.resist['CONFUSION']}}">{{result.resist['CONFUSION']}}</div>
-          <div class="resist-{{result.resist['STOP']}}">{{result.resist['STOP']}}</div>
-          <div class="resist-{{result.resist['INBREATH']}}">{{result.resist['INBREATH']}}</div>
+          <div class="resist-{{result.resist['FIRE']}}">{{result.resist['FIRE'] | translate}}</div>
+          <div class="resist-{{result.resist['ICE']}}">{{result.resist['ICE'] | translate}}</div>
+          <div class="resist-{{result.resist['THANDER']}}">{{result.resist['THANDER'] | translate}}</div>
+          <div class="resist-{{result.resist['WIND']}}">{{result.resist['WIND'] | translate}}</div>
+          <div class="resist-{{result.resist['EXPLODE']}}">{{result.resist['EXPLODE'] | translate}}</div>
+          <div class="resist-{{result.resist['LIGHT']}}">{{result.resist['LIGHT'] | translate}}</div>
+          <div class="resist-{{result.resist['DARK']}}">{{result.resist['DARK'] | translate}}</div>
+          <div class="resist-{{result.resist['DEATH']}}">{{result.resist['DEATH'] | translate}}</div>
+          <div class="resist-{{result.resist['INMAGIC']}}">{{result.resist['INMAGIC'] | translate}}</div>
+          <div class="resist-{{result.resist['MISS']}}">{{result.resist['MISS'] | translate}}</div>
+          <div class="resist-{{result.resist['TOXIC']}}">{{result.resist['TOXIC'] | translate}}</div>
+          <div class="resist-{{result.resist['SLEEP']}}">{{result.resist['SLEEP'] | translate}}</div>
+          <div class="resist-{{result.resist['CONFUSION']}}">{{result.resist['CONFUSION'] | translate}}</div>
+          <div class="resist-{{result.resist['STOP']}}">{{result.resist['STOP'] | translate}}</div>
+          <div class="resist-{{result.resist['INBREATH']}}">{{result.resist['INBREATH'] | translate}}</div>
         </div>
       </div>
     </div>
