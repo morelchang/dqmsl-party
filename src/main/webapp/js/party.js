@@ -68,7 +68,14 @@ function Mobi(mon, stars) {
     this.mon = mon;
 }
 
-var app = angular.module('partyApp', [])
+var app = angular.module('partyApp', ['pascalprecht.translate'])
+    .config(function($translateProvider) {
+        $translateProvider.useStaticFilesLoader({
+            prefix: 'lang/',
+            suffix: '.json'
+        });
+        $translateProvider.determinePreferredLanguage();
+    })
     .directive('ngEnter', function() {
         return function(scope, elem, attrs) {
             elem.bind('keydown keypress', function(event) {
@@ -152,13 +159,13 @@ var app = angular.module('partyApp', [])
                     // render to search result section
                     $scope.error = 'search result:' + mons.length;
                     $scope.results = mons;
+                    $scope.sort();
                 }).fail(function(error) {
                     $scope.result = null;
                     $scope.error = 'search failed:' + error;
                 }).always(function() {
                     $scope.$apply();
                 });
-            this.sort();
         };
         $scope.changeStars = function (index, stars) {
             this.results[index].withStars(stars);
