@@ -69,11 +69,29 @@ div {
     font-size: x-small;
     color: #888888;
 }
+div.header-icon {
+    width: 5.2%;
+}
+div.header-status {
+    width: 4%;
+}
+div.header-resist {
+    width: 3.8%;
+}
+div.contnet-icon {
+    text-align: center;
+}
+div.content-status {
+    text-align: right;
+}
+div.content-resist {
+    text-align: center;
+}
 
 /*
  * monster display
  */
-.moster-icon-small {
+.monster-icon-small {
     width: 60px;
     height: 60px;
 }

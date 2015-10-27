@@ -4,6 +4,18 @@ function Mon(data) {
     this.calTotal();
 };
 
+Mon.resists = {
+    VERY_WEEK: 0,
+    WEEK: 1,
+    NORMAL: 2,
+    LITTLE: 3,
+    LOT: 4,
+    HELF: 5,
+    VOID: 6,
+    REFLECT: 7,
+    ABSORB: 8,
+};
+
 Mon.prototype.withStars = function(stars) {
     this.stars = stars ? parseInt(stars) : 0;
     this.hp = this.starup(this.original.hp, stars);
@@ -194,7 +206,31 @@ var app = angular.module('partyApp', ['pascalprecht.translate'])
             // sorting
             var sortBy = this.sortBy;
             this.results.sort(function(a, b) {
-                return b[sortBy] - a[sortBy];
+                // loop prop with '.'
+                var sortProps = sortBy.split('.');
+                var aProp = a;
+                var bProp = b;
+                for (var i = 0; i < sortProps.length; i++) {
+                    aProp = aProp[sortProps[i]];
+                    bProp = bProp[sortProps[i]];
+                    // map order if comapring resist
+                    if (i > 0 && sortProps[i - 1] === 'resist') {
+                        // default to 'NORMAL'
+                        aProp = aProp || 'NORMAL';
+                        bProp = bProp || 'NORMAL';
+
+                        aProp = Mon.resists[aProp];
+                        bProp = Mon.resists[bProp];
+                    }
+                }
+
+                // sorting asc by default
+                if (!bProp || aProp > bProp) {
+                    return -1;
+                } else if (!aProp || aProp < bProp) {
+                    return 1;
+                }
+                return 0;
             });
         };
         $scope.saveResult = function() {

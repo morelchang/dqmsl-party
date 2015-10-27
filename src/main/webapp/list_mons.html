@@ -28,7 +28,7 @@
         <a class="btn" ng-click="searchMultiple()">{{'Search' | translate}}</a>
         <a class="btn" ng-click="saveResult()">{{'Save Result' | translate}}</a>
         <a class="btn" ng-click="loadSaved()">{{'Load Saved' | translate}}</a>
-        <a class="btn" ng-click="addToSaved()">{{'Add To Saved' | translate}}</a>
+        <a class="btn" ng-click="loadSaved()">{{'Add To Saved' | translate}}</a>
       </div>
 
       <!-- search error -->
@@ -37,36 +37,36 @@
       <!-- search result -->
       <div class="search-result table" ng-hide="!results">
         <div class="table-tr">
-          <div></div>
-          <div></div>
-          <div><a href="#" ng-class="{'sorting': sortBy === 'hp'   , 'asc': sortByAsc}" ng-click="sort('hp')">HP</a></div>
-          <div><a href="#" ng-class="{'sorting': sortBy === 'mp'   , 'asc': sortByAsc}" ng-click="sort('mp')">MP</a></div>
-          <div><a href="#" ng-class="{'sorting': sortBy === 'att'  , 'asc': sortByAsc}" ng-click="sort('att')">{{'ATT' | translate}}</a></div>
-          <div><a href="#" ng-class="{'sorting': sortBy === 'def'  , 'asc': sortByAsc}" ng-click="sort('def')">{{'DEF' | translate}}</a></div>
-          <div><a href="#" ng-class="{'sorting': sortBy === 'dex'  , 'asc': sortByAsc}" ng-click="sort('dex')">{{'DEX' | translate}}</a></div>
-          <div><a href="#" ng-class="{'sorting': sortBy === 'int'  , 'asc': sortByAsc}" ng-click="sort('int')">{{'INT' | translate}}</a></div>
-          <div><a href="#" ng-class="{'sorting': sortBy === 'total', 'asc': sortByAsc}" ng-click="sort('total')">{{'Total' | translate}}</a></div>
-          <div><a href="#" ng-click="sort('')">{{'Fire' | translate}}</a></div>
-          <div><a href="#" ng-click="sort('')">{{'Ice' | translate}}</a></div>
-          <div><a href="#" ng-click="sort('')">{{'Thander' | translate}}</a></div>
-          <div><a href="#" ng-click="sort('')">{{'Wind' | translate}}</a></div>
-          <div><a href="#" ng-click="sort('')">{{'Explode' | translate}}</a></div>
-          <div><a href="#" ng-click="sort('')">{{'Light' | translate}}</a></div>
-          <div><a href="#" ng-click="sort('')">{{'Dark' | translate}}</a></div>
-          <div><a href="#" ng-click="sort('')">{{'Death' | translate}}</a></div>
-          <div><a href="#" ng-click="sort('')">{{'Inmagic' | translate}}</a></div>
-          <div><a href="#" ng-click="sort('')">{{'Miss' | translate}}</a></div>
-          <div><a href="#" ng-click="sort('')">{{'Toxic' | translate}}</a></div>
-          <div><a href="#" ng-click="sort('')">{{'Sleep' | translate}}</a></div>
-          <div><a href="#" ng-click="sort('')">{{'Confusion' | translate}}</a></div>
-          <div><a href="#" ng-click="sort('')">{{'Stop' | translate}}</a></div>
-          <div><a href="#" ng-click="sort('')">{{'Inbreath' | translate}}</a></div>
+          <div class="header-icon"></div>
+          <div class="header-no"><a href="#" ng-class="{'sorting': sortBy === 'no'   , 'asc': sortByAsc}" ng-click="sort('no')">NO</a></div>
+          <div class="header-status"><a href="#" ng-class="{'sorting': sortBy === 'hp'   , 'asc': sortByAsc}" ng-click="sort('hp')">HP</a></div>
+          <div class="header-status"><a href="#" ng-class="{'sorting': sortBy === 'mp'   , 'asc': sortByAsc}" ng-click="sort('mp')">MP</a></div>
+          <div class="header-status"><a href="#" ng-class="{'sorting': sortBy === 'att'  , 'asc': sortByAsc}" ng-click="sort('att')">{{'ATT' | translate}}</a></div>
+          <div class="header-status"><a href="#" ng-class="{'sorting': sortBy === 'def'  , 'asc': sortByAsc}" ng-click="sort('def')">{{'DEF' | translate}}</a></div>
+          <div class="header-status"><a href="#" ng-class="{'sorting': sortBy === 'dex'  , 'asc': sortByAsc}" ng-click="sort('dex')">{{'DEX' | translate}}</a></div>
+          <div class="header-status"><a href="#" ng-class="{'sorting': sortBy === 'int'  , 'asc': sortByAsc}" ng-click="sort('int')">{{'INT' | translate}}</a></div>
+          <div class="header-status"><a href="#" ng-class="{'sorting': sortBy === 'total', 'asc': sortByAsc}" ng-click="sort('total')">{{'Total' | translate}}</a></div>
+          <div class="header-resist"><a href="#" ng-class="{'sorting': sortBy === 'resist.FIRE'     , 'asc': sortByAsc}" ng-click="sort('resist.FIRE')">{{'Fire' | translate}}</a></div>
+          <div class="header-resist"><a href="#" ng-class="{'sorting': sortBy === 'resist.ICE'      , 'asc': sortByAsc}" ng-click="sort('resist.ICE')">{{'Ice' | translate}}</a></div>
+          <div class="header-resist"><a href="#" ng-class="{'sorting': sortBy === 'resist.THANDER'  , 'asc': sortByAsc}" ng-click="sort('resist.THANDER')">{{'Thander' | translate}}</a></div>
+          <div class="header-resist"><a href="#" ng-class="{'sorting': sortBy === 'resist.WIND'     , 'asc': sortByAsc}" ng-click="sort('resist.WIND')">{{'Wind' | translate}}</a></div>
+          <div class="header-resist"><a href="#" ng-class="{'sorting': sortBy === 'resist.EXPLODE'  , 'asc': sortByAsc}" ng-click="sort('resist.EXPLODE')">{{'Explode' | translate}}</a></div>
+          <div class="header-resist"><a href="#" ng-class="{'sorting': sortBy === 'resist.LIGHT'    , 'asc': sortByAsc}" ng-click="sort('resist.LIGHT')">{{'Light' | translate}}</a></div>
+          <div class="header-resist"><a href="#" ng-class="{'sorting': sortBy === 'resist.DARK'     , 'asc': sortByAsc}" ng-click="sort('resist.DARK')">{{'Dark' | translate}}</a></div>
+          <div class="header-resist"><a href="#" ng-class="{'sorting': sortBy === 'resist.DEATH'    , 'asc': sortByAsc}" ng-click="sort('resist.DEATH')">{{'Death' | translate}}</a></div>
+          <div class="header-resist"><a href="#" ng-class="{'sorting': sortBy === 'resist.INMAGIC'  , 'asc': sortByAsc}" ng-click="sort('resist.INMAGIC')">{{'Inmagic' | translate}}</a></div>
+          <div class="header-resist"><a href="#" ng-class="{'sorting': sortBy === 'resist.MISS'     , 'asc': sortByAsc}" ng-click="sort('resist.MISS')">{{'Miss' | translate}}</a></div>
+          <div class="header-resist"><a href="#" ng-class="{'sorting': sortBy === 'resist.TOXIC'    , 'asc': sortByAsc}" ng-click="sort('resist.TOXIC')">{{'Toxic' | translate}}</a></div>
+          <div class="header-resist"><a href="#" ng-class="{'sorting': sortBy === 'resist.SLEEP'    , 'asc': sortByAsc}" ng-click="sort('resist.SLEEP')">{{'Sleep' | translate}}</a></div>
+          <div class="header-resist"><a href="#" ng-class="{'sorting': sortBy === 'resist.CONFUSION', 'asc': sortByAsc}" ng-click="sort('resist.CONFUSION')">{{'Confusion' | translate}}</a></div>
+          <div class="header-resist"><a href="#" ng-class="{'sorting': sortBy === 'resist.STOP'     , 'asc': sortByAsc}" ng-click="sort('resist.STOP')">{{'Stop' | translate}}</a></div>
+          <div class="header-resist"><a href="#" ng-class="{'sorting': sortBy === 'resist.INBREATH' , 'asc': sortByAsc}" ng-click="sort('resist.INBREATH')">{{'Inbreath' | translate}}</a></div>
         </div>
         <div class="table-tr" ng-repeat="result in results">
           <div>
-            <div ng-class="{'star-icon0': result.stars <= 0, 'star-icon1': result.stars === 1, 'star-icon2': result.stars === 2, 'star-icon3': result.stars === 3, 'star-icon4': result.stars === 4}"><img class="moster-icon-small" ng-src="{{result.icon}}"></div>
+            <div ng-class="{'star-icon0': result.stars <= 0, 'star-icon1': result.stars === 1, 'star-icon2': result.stars === 2, 'star-icon3': result.stars === 3, 'star-icon4': result.stars === 4}"><img class="monster-icon-small" ng-src="{{result.icon}}"></div>
           </div>
-          <div>
+          <div class="content-no">
               {{'No:' | translate}} {{result.no}}<br/>
               {{result.name}}<br/>
               <a href="#" ng-class="{'star-on': result.stars <= 0}" ng-click="changeStars($index, 0)">[0]</a>
@@ -75,28 +75,28 @@
               <a href="#" ng-class="{'star-on': result.stars === 3}" ng-click="changeStars($index, 3)">[3]</a> 
               <a href="#" ng-class="{'star-on': result.stars === 4}" ng-click="changeStars($index, 4)">[4]</a>
           </div>
-          <div>{{result.hp}}</div>
-          <div>{{result.mp}}</div>
-          <div>{{result.att}}</div>
-          <div>{{result.def}}</div>
-          <div>{{result.dex}}</div>
-          <div>{{result.int}}</div>
-          <div style="text-align: right">{{result.total}}</div>
-          <div class="resist-{{result.resist['FIRE']}}">{{result.resist['FIRE'] | translate}}</div>
-          <div class="resist-{{result.resist['ICE']}}">{{result.resist['ICE'] | translate}}</div>
-          <div class="resist-{{result.resist['THANDER']}}">{{result.resist['THANDER'] | translate}}</div>
-          <div class="resist-{{result.resist['WIND']}}">{{result.resist['WIND'] | translate}}</div>
-          <div class="resist-{{result.resist['EXPLODE']}}">{{result.resist['EXPLODE'] | translate}}</div>
-          <div class="resist-{{result.resist['LIGHT']}}">{{result.resist['LIGHT'] | translate}}</div>
-          <div class="resist-{{result.resist['DARK']}}">{{result.resist['DARK'] | translate}}</div>
-          <div class="resist-{{result.resist['DEATH']}}">{{result.resist['DEATH'] | translate}}</div>
-          <div class="resist-{{result.resist['INMAGIC']}}">{{result.resist['INMAGIC'] | translate}}</div>
-          <div class="resist-{{result.resist['MISS']}}">{{result.resist['MISS'] | translate}}</div>
-          <div class="resist-{{result.resist['TOXIC']}}">{{result.resist['TOXIC'] | translate}}</div>
-          <div class="resist-{{result.resist['SLEEP']}}">{{result.resist['SLEEP'] | translate}}</div>
-          <div class="resist-{{result.resist['CONFUSION']}}">{{result.resist['CONFUSION'] | translate}}</div>
-          <div class="resist-{{result.resist['STOP']}}">{{result.resist['STOP'] | translate}}</div>
-          <div class="resist-{{result.resist['INBREATH']}}">{{result.resist['INBREATH'] | translate}}</div>
+          <div class="content-status">{{result.hp}}</div>
+          <div class="content-status">{{result.mp}}</div>
+          <div class="content-status">{{result.att}}</div>
+          <div class="content-status">{{result.def}}</div>
+          <div class="content-status">{{result.dex}}</div>
+          <div class="content-status">{{result.int}}</div>
+          <div class="content-status">{{result.total}}</div>
+          <div class="content-resist resist-{{result.resist['FIRE']}}">{{result.resist['FIRE'] | translate}}</div>
+          <div class="content-resist resist-{{result.resist['ICE']}}">{{result.resist['ICE'] | translate}}</div>
+          <div class="content-resist resist-{{result.resist['THANDER']}}">{{result.resist['THANDER'] | translate}}</div>
+          <div class="content-resist resist-{{result.resist['WIND']}}">{{result.resist['WIND'] | translate}}</div>
+          <div class="content-resist resist-{{result.resist['EXPLODE']}}">{{result.resist['EXPLODE'] | translate}}</div>
+          <div class="content-resist resist-{{result.resist['LIGHT']}}">{{result.resist['LIGHT'] | translate}}</div>
+          <div class="content-resist resist-{{result.resist['DARK']}}">{{result.resist['DARK'] | translate}}</div>
+          <div class="content-resist resist-{{result.resist['DEATH']}}">{{result.resist['DEATH'] | translate}}</div>
+          <div class="content-resist resist-{{result.resist['INMAGIC']}}">{{result.resist['INMAGIC'] | translate}}</div>
+          <div class="content-resist resist-{{result.resist['MISS']}}">{{result.resist['MISS'] | translate}}</div>
+          <div class="content-resist resist-{{result.resist['TOXIC']}}">{{result.resist['TOXIC'] | translate}}</div>
+          <div class="content-resist resist-{{result.resist['SLEEP']}}">{{result.resist['SLEEP'] | translate}}</div>
+          <div class="content-resist resist-{{result.resist['CONFUSION']}}">{{result.resist['CONFUSION'] | translate}}</div>
+          <div class="content-resist resist-{{result.resist['STOP']}}">{{result.resist['STOP'] | translate}}</div>
+          <div class="content-resist resist-{{result.resist['INBREATH']}}">{{result.resist['INBREATH'] | translate}}</div>
         </div>
       </div>
     </div>
