@@ -22,7 +22,7 @@
 
     <h1>{{'DQMSL PARTY' | translate}}</h1>
     <!-- search input section -->
-    <div class="search-section" ng-controller="searchMonsterController">
+    <div class="search-section" ng-controller="searchMonsterController" data-ng-init="init()">
       <div class="search-input">
         {{'Monster No:' | translate}} <input type="text" value="monster number" ng-model="searchNo" ng-enter="searchMultiple()" />
         <a class="btn" ng-click="searchMultiple()">{{'Search' | translate}}</a>

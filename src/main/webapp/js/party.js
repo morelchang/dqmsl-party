@@ -154,6 +154,13 @@ var app = angular.module('partyApp', ['pascalprecht.translate'])
         };
     })
     .controller('searchMonsterController', ['$scope', 'partyService', '$translate', function($scope, partyService, $translate) {
+        $scope.init = function() {
+            var initSearchKey = window.location.hash.substr(1);
+            if (initSearchKey) {
+                this.searchNo = initSearchKey;
+                this.searchMultiple();
+            }
+        };
         $scope.searchMultiple = function() {
             // cleanup
             this.error = '';
