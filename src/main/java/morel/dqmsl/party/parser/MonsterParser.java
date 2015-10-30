@@ -61,7 +61,7 @@ public class MonsterParser {
 		
 		// tokugi
 		Map<String, Skill> skills = new TreeMap<>();
-		Elements tkgElems = doc.select("span.tokugiSprite~a");
+		Elements tkgElems = doc.select("#tokugiImageInfoImage~div span.tokugiSprite~a");
 		for (Element e : tkgElems) {
 			Matcher ma = Pattern.compile("&to=%2c(\\d+)&").matcher(e.attr("href"));
 			if (!ma.find()) {
@@ -80,6 +80,8 @@ public class MonsterParser {
 		}
 		m.setSkills(skills);
 		
+		// TODO: tokugi for new-born
+		// css selector "#tokugiImageInfoImage2~div span.tokugiSprite~a"
 		return m;
 	}
 	
