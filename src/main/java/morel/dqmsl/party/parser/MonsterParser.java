@@ -4,11 +4,17 @@ import java.io.IOException;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Iterator;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import morel.dqmsl.party.data.JsonFileSkillDao;
 import morel.dqmsl.party.model.Monster;
 import morel.dqmsl.party.model.Monster.Resistance;
 import morel.dqmsl.party.model.Monster.ResistanceReaction;
 import morel.dqmsl.party.model.Monster.ResistanceType;
+import morel.dqmsl.party.model.Skill;
 
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -52,6 +58,28 @@ public class MonsterParser {
 			
 			m.addResistance(res);
 		}
+		
+		// tokugi
+		Map<String, Skill> skills = new TreeMap<>();
+		Elements tkgElems = doc.select("span.tokugiSprite~a");
+		for (Element e : tkgElems) {
+			Matcher ma = Pattern.compile("&to=%2c(\\d+)&").matcher(e.attr("href"));
+			if (!ma.find()) {
+				throw new ParseException("failed to parse skill id from string:" + e.attr("href"), 0);
+			}
+			
+			String skillId = ma.group(1);
+			if (skillId == null) {
+				System.out.println("failed to get skill id from node:" + e.toString());
+				continue;
+			}
+			
+			
+			Skill skill = new JsonFileSkillDao().findSkill(skillId);
+			skills.put(skillId, skill);
+		}
+		m.setSkills(skills);
+		
 		return m;
 	}
 	

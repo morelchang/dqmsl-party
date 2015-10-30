@@ -11,12 +11,14 @@ import org.jsoup.nodes.Document;
 
 public class PartyFetcher {
 
+	private MonsterParser monsterParser = new MonsterParser();
+
 	public static void main(String[] args) {
 		// fetch and print result
 		PartyFetcher pf = new PartyFetcher();
 
-		int upTo = 3;
-		for (int no = 1; no <= upTo; no++) {
+		int upTo = 522;
+		for (int no = 519; no <= upTo; no++) {
 			// fetch monster
 			Monster mm = null;
 			try {
@@ -46,7 +48,7 @@ public class PartyFetcher {
 			return null;
 		}
 		
-		Monster m = new MonsterParser().parse(doc);
+		Monster m = monsterParser.parse(doc);
 		if (m.getHp() == 0) {
 			System.out.println("monster data incorrect, no:" + no);
 			System.in.read();

@@ -10,13 +10,20 @@ import morel.dqmsl.party.model.Monster;
 public class PartySync {
 
 	public static void main(String[] args) throws IOException, ParseException {
-		PartyFetcher pf = new PartyFetcher();
+		PartySync s = new PartySync();
+		boolean overwrite = true;
+		int max = 900;
 		
+		s.sync(1, max, overwrite);
+	}
+
+	private void sync(int start, int to, boolean overwrite) throws IOException {
+		PartyFetcher pf = new PartyFetcher();
 		JsonFileMonsterDao dao = new JsonFileMonsterDao();
-		for (int no = 1; no <= 900; no++) {
+		for (int no = start; no <= to; no++) {
 			// skip monster persisted
 			File source = new File("./data/monster-" + no + ".json");
-			if (source.exists()) {
+			if (!overwrite && source.exists()) {
 				System.out.println("skip exist no:" + no);
 				continue;
 			}
@@ -27,6 +34,7 @@ public class PartySync {
 				mm = pf.fetch(no);
 			} catch (Exception e) {
 				System.out.println("fetch no:" + no + " failed:" + e.getMessage());
+				e.printStackTrace();
 				continue;
 			}
 			

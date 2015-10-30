@@ -2,6 +2,7 @@ package morel.dqmsl.party.model;
 
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.stream.Collectors;
 import java.util.Set;
 import java.util.TreeMap;
 
@@ -70,6 +71,7 @@ public class Monster {
 	private Map<ResistanceType, ResistanceReaction> resistances = new TreeMap<>();
 	
 	// skills
+	private Map<String, Skill> skills = new TreeMap<>();
 
 	// tokusei
 	
@@ -79,6 +81,14 @@ public class Monster {
 	
 	// reincarnation eggs
 	
+	public Map<String, Skill> getSkills() {
+		return skills;
+	}
+
+	public void setSkills(Map<String, Skill> skills) {
+		this.skills = skills;
+	}
+
 	public int getNo() {
 		return no;
 	}
@@ -228,7 +238,12 @@ public class Monster {
 				" def:" + this.getDefense() + "\n" +
 				" dex:" + this.getDexterity() + "\n" +
 				" int:" + this.getIntelligent() + "\n" + 
-				" resistance:\n" + getResistanceString();
+				" resistance:\n" + getResistanceString() +
+				" skills:\n" + getSkillsString();
+	}
+
+	private String getSkillsString() {
+		return this.skills.entrySet().stream().map(e -> "    " + e.getValue()).collect(Collectors.joining("\n"));
 	}
 
 	private String getResistanceString() {
