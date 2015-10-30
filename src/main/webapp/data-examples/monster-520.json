@@ -1,0 +1,139 @@
+{
+    "@type": "morel.dqmsl.party.model.Monster",
+    "defense": 416,
+    "dexterity": 391,
+    "dislikeNum": 87,
+    "hp": 590,
+    "icon": "/img/icon/000521.gif",
+    "intelligent": 439,
+    "likeNum": 487,
+    "maxLevel": 80,
+    "mp": 310,
+    "name": "\u95c7\u306e\u5927\u9b54\u738b\u30be\u30fc\u30de",
+    "no": 521,
+    "offense": 402,
+    "rank": {
+        "name": "F",
+        "ordinal": 7
+    },
+    "resistances": {
+        "@items": [
+            {
+                "@id": 2,
+                "@type": "morel.dqmsl.party.model.Monster$ResistanceReaction",
+                "name": "HELF",
+                "ordinal": 3
+            },
+            {
+                "@id": 1,
+                "@type": "morel.dqmsl.party.model.Monster$ResistanceReaction",
+                "name": "VOID",
+                "ordinal": 2
+            },
+            {
+                "@ref": 2
+            },
+            {
+                "@ref": 1
+            },
+            {
+                "@ref": 2
+            },
+            {
+                "@ref": 1
+            },
+            {
+                "@ref": 1
+            },
+            {
+                "@ref": 2
+            },
+            {
+                "@ref": 1
+            }
+        ],
+        "@keys": [
+            {
+                "@type": "morel.dqmsl.party.model.Monster$ResistanceType",
+                "name": "FIRE",
+                "ordinal": 0
+            },
+            {
+                "@type": "morel.dqmsl.party.model.Monster$ResistanceType",
+                "name": "ICE",
+                "ordinal": 1
+            },
+            {
+                "@type": "morel.dqmsl.party.model.Monster$ResistanceType",
+                "name": "EXPLODE",
+                "ordinal": 4
+            },
+            {
+                "@type": "morel.dqmsl.party.model.Monster$ResistanceType",
+                "name": "LIGHT",
+                "ordinal": 5
+            },
+            {
+                "@type": "morel.dqmsl.party.model.Monster$ResistanceType",
+                "name": "DARK",
+                "ordinal": 6
+            },
+            {
+                "@type": "morel.dqmsl.party.model.Monster$ResistanceType",
+                "name": "DEATH",
+                "ordinal": 7
+            },
+            {
+                "@type": "morel.dqmsl.party.model.Monster$ResistanceType",
+                "name": "INMAGIC",
+                "ordinal": 8
+            },
+            {
+                "@type": "morel.dqmsl.party.model.Monster$ResistanceType",
+                "name": "SLEEP",
+                "ordinal": 11
+            },
+            {
+                "@type": "morel.dqmsl.party.model.Monster$ResistanceType",
+                "name": "CONFUSION",
+                "ordinal": 12
+            }
+        ],
+        "@type": "java.util.TreeMap"
+    },
+    "skills": {
+        "10012": {
+            "@type": "morel.dqmsl.party.model.Skill",
+            "id": "10012",
+            "name": "\u3084\u307f\u306e\u306f\u3069\u3046",
+            "type": {
+                "id": "100",
+                "name": "\u4f53\u6280\u72b6\u614b\u7570\u5e38"
+            },
+            "typeId": "100",
+            "typeName": "\u4f53\u6280\u72b6\u614b\u7570\u5e38"
+        },
+        "1022": {
+            "@type": "morel.dqmsl.party.model.Skill",
+            "id": "1022",
+            "name": "\u30b5\u30a4\u30b3\u30ad\u30e3\u30ce\u30f3",
+            "type": {
+                "id": "10",
+                "name": "\u653b\u6483\u546a\u6587"
+            },
+            "typeId": "10",
+            "typeName": "\u653b\u6483\u546a\u6587"
+        },
+        "@type": "java.util.TreeMap"
+    },
+    "system": {
+        "name": "MAOU",
+        "ordinal": 7
+    },
+    "type": {
+        "name": "REC",
+        "ordinal": 2
+    },
+    "viewedNum": 286218,
+    "weight": 32
+}

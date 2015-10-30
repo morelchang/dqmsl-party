@@ -72,6 +72,11 @@ div {
 div.header-icon {
     width: 5.2%;
 }
+div.header-no {
+}
+div.header-skills {
+    width: 7%;
+}
 div.header-status {
     width: 4%;
 }
@@ -80,6 +85,87 @@ div.header-resist {
 }
 div.contnet-icon {
     text-align: center;
+}
+div.content-no {
+    white-space: nowrap;
+}
+div.content-skill {
+    white-space: nowrap;
+}
+div.content-skill-item {
+}
+div.content-skill-item-name {
+    display: inline-block;
+    line-height: 22px;
+}
+div.content-skill-item-type {
+    background: url(http://dqmsl-search.net/img/tokugiSprite6.png) no-repeat;
+    height: 17px;
+    width: 17px;
+    display: inline-block;
+    vertical-align: top;
+    margin: 0 3px;
+    vertical-align: text-bottom;
+}
+div.skill10 {
+    background-position: 0px 0px;
+}
+div.skill20 {
+    background-position: -17px 0px;
+}
+div.skill30 {
+    background-position: -34px 0px;
+}
+div.skill40 {
+    background-position: -51px 0px;
+}
+div.skill50 {
+    background-position: -68px 0px;
+}
+div.skill60 {
+    background-position: -85px 0px;
+}
+div.skill70 {
+    background-position: -102px 0px;
+}
+div.skill80 {
+    background-position: -119px 0px;
+}
+div.skill90 {
+    background-position: -136px 0px;
+}
+div.skill100 {
+    background-position: -153px 0px;
+}
+div.skill110 {
+    background-position: 0px -17px;   
+}                                   
+div.skill120 {                      
+    background-position: -17px -17px;
+}
+div.skill130 {
+    background-position: -34px -17px;
+}
+div.skill140 {
+    background-position: -51px -17px;
+}
+div.skill150 {
+    background-position: -68px -17px;
+}
+div.skill160 {
+    background-position: -85px -17px;
+}
+div.skill170 {
+    background-position: -102px -17px;
+}
+div.skill180 {
+    background-position: -119px -17px;
+}
+div.skill190 {
+    background-position: -136px -17px;
+}
+div.skill200 {
+    background-position: -153px -17px;
 }
 div.content-status {
     text-align: right;

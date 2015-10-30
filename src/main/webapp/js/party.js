@@ -71,6 +71,14 @@ Mon.parsePartyFetchJson = function(json) {
         }
         r.resist[resistName] = resistItem.name;
     });
+    // formatting skills
+    r.skills = [];
+    _.each(json.skills, function(s, index) {
+        if (!s.name) {
+            return;
+        }
+        r.skills.push(s);
+    });
 
     return new Mon(r);
 };
