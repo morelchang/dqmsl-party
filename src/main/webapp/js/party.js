@@ -2,6 +2,17 @@ function Mon(data) {
     _.extend(this, data);
     this.original = data;
     this.calTotal();
+
+    // initialie skills
+    this.skills = [];
+    for (var i = 0; i < 4; i++) {
+        if (i < this.original.skills.length) {
+            var original = this.original.skills[i];
+            this.skills[i] = _.extend({fixed: true, original: original}, original);
+            continue;
+        }
+        this.skills[i] = undefined;
+    }
 };
 
 Mon.resists = {

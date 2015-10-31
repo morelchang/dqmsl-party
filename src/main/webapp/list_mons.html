@@ -6,6 +6,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-translate/2.8.1/angular-translate.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-translate-loader-static-files/2.8.1/angular-translate-loader-static-files.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
     <script src="js/party.js" ></script>
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -16,7 +17,9 @@
       ga('create', 'UA-924104-6', 'auto');
       ga('send', 'pageview');
     </script>
+
     <link rel="stylesheet" type="text/css" href="style/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.css">
   </head>
   <body ng-app="partyApp">
 
@@ -77,8 +80,9 @@
               <a href="#" ng-class="{'star-on': result.stars === 4}" ng-click="changeStars($index, 4)">[4]</a>
           </div>
           <div class="content-skill">
-            <div class="content-skill-item" ng-repeat="skill in result.skills">
-              <div class="content-skill-item-type skill{{skill.typeId}}"></div><div class="content-skill-item-name">{{skill.name}}</div>
+            <div class="content-skill-items" ng-repeat="skill in result.skills track by $index">
+              <div class="content-skill-item-type skill{{skill.typeId}}" ng-hide="!skill"></div><div class="content-skill-item-name" ng-hide="!skill">{{skill.name}}</div>
+              <div class="content-skill-item-empty" ng-hide="skill">{{'Click to select' | translate}}</div>
             </div>
           </div>
           <div class="content-status">{{result.hp}}</div>

@@ -92,11 +92,29 @@ div.content-no {
 div.content-skill {
     white-space: nowrap;
 }
-div.content-skill-item {
+div.content-skill-items {
+}
+div.content-skill-item-empty {
+    margin: 2px 2px 2px 2px;
+    background-color: #FEFEFE;
+    color: #CACACA;
+    display: block;
+    height: 16px;
+    border: 1px dashed #B0B0B0;
+    padding: 2px 0px 0px 4px;
+}
+div.content-skill-item-empty:hover {
+    cursor: hand;
+    margin: 2px 2px 2px 2px;
+    background-color: #FCFCFC;
+    color: #AAAAAA;
+    display: block;
+    height: 16px;
+    border: 1px dashed #AAAAAA;
 }
 div.content-skill-item-name {
     display: inline-block;
-    line-height: 22px;
+    line-height: 20px;
 }
 div.content-skill-item-type {
     background: url(http://dqmsl-search.net/img/tokugiSprite6.png) no-repeat;
