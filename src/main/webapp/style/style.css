@@ -116,6 +116,135 @@ div.content-skill-item-name {
     display: inline-block;
     line-height: 20px;
 }
+div.content-skill-item-name {
+    display: inline-block;
+    line-height: 20px;
+}
+div.content-skill-item-name.selection {
+    display: inline-block;
+    line-height: 20px;
+    border: 1px solid #EEEEEE;
+    padding: 5px;
+    margin: 0px 5px 0px 5px;
+    cursor: hand;
+}
+div.content-skill-item-name.selection.skill10:hover {
+    background: rgba(255, 51, 44, 0.34); /* red */
+}
+div.content-skill-item-name.selection.skill20:hover {
+    background: rgba(201, 58, 248, 0.32); /* purple */
+}
+div.content-skill-item-name.selection.skill30:hover {
+    background: rgba(53, 232, 55, 0.32); /* green */
+}
+div.content-skill-item-name.selection.skill40:hover {
+    background: rgba(255, 217, 54, 0.32); /* yellow */
+}
+div.content-skill-item-name.selection.skill50:hover {
+    background: rgba(0,205,244,0.32); /* blue */
+}
+div.content-skill-item-name.selection.skill60:hover {
+    background: rgba(255, 51, 44, 0.34);
+}
+div.content-skill-item-name.selection.skill70:hover {
+    background: rgba(0,205,244,0.32);
+}
+div.content-skill-item-name.selection.skill80:hover {
+    background: rgba(255, 51, 44, 0.34);
+}
+div.content-skill-item-name.selection.skill90:hover {
+    background: rgba(53, 232, 55, 0.32);
+}
+div.content-skill-item-name.selection.skill100:hover {
+    background: rgba(0,205,244,0.32);
+}
+div.content-skill-item-name.selection.skill110:hover {
+    background: rgba(201, 58, 248, 0.32);
+}
+div.content-skill-item-name.selection.skill120:hover {
+    background: rgba(255, 51, 44, 0.34);
+}
+div.content-skill-item-name.selection.skill130:hover {
+    background: rgba(0,205,244,0.32); /* blue */
+}
+div.content-skill-item-name.selection.skill140:hover {
+    background: rgba(0,205,244,0.32); /* blue */
+}
+div.content-skill-item-name.selection.skill150:hover {
+    background: rgba(255, 217, 54, 0.32); /* yellow */
+}
+div.content-skill-item-name.selection.skill160:hover {
+    background: rgba(255, 217, 54, 0.32); /* yellow */
+}
+div.content-skill-item-name.selection.skill170:hover {
+    background: rgba(255, 51, 44, 0.34);
+}
+div.content-skill-item-name.selection.skill180:hover {
+    background: rgba(255, 217, 54, 0.32); /* yellow */
+}
+div.content-skill-item-name.selection.skill190:hover {
+    background: rgba(0,205,244,0.32); /* blue */
+}
+div.content-skill-item-name.selection.selected {
+    border: 3px solid #F93737;
+}
+div.content-skill-item-name.selection.skill10.selected {
+    background: rgba(255, 51, 44, 0.34); /* red */
+}
+div.content-skill-item-name.selection.skill20.selected {
+    background: rgba(201, 58, 248, 0.32); /* purple */
+}
+div.content-skill-item-name.selection.skill30.selected {
+    background: rgba(53, 232, 55, 0.32); /* green */
+}
+div.content-skill-item-name.selection.skill40.selected {
+    background: rgba(255, 217, 54, 0.32); /* yellow */
+}
+div.content-skill-item-name.selection.skill50.selected {
+    background: rgba(0,205,244,0.32); /* blue */
+}
+div.content-skill-item-name.selection.skill60.selected {
+    background: rgba(255, 51, 44, 0.34);
+}
+div.content-skill-item-name.selection.skill70.selected {
+    background: rgba(0,205,244,0.32);
+}
+div.content-skill-item-name.selection.skill80.selected {
+    background: rgba(255, 51, 44, 0.34);
+}
+div.content-skill-item-name.selection.skill90.selected {
+    background: rgba(53, 232, 55, 0.32);
+}
+div.content-skill-item-name.selection.skill100.selected {
+    background: rgba(0,205,244,0.32);
+}
+div.content-skill-item-name.selection.skill110.selected {
+    background: rgba(201, 58, 248, 0.32);
+}
+div.content-skill-item-name.selection.skill120.selected {
+    background: rgba(255, 51, 44, 0.34);
+}
+div.content-skill-item-name.selection.skill130.selected {
+    background: rgba(0,205,244,0.32); /* blue */
+}
+div.content-skill-item-name.selection.skill140.selected {
+    background: rgba(0,205,244,0.32); /* blue */
+}
+div.content-skill-item-name.selection.skill150.selected {
+    background: rgba(255, 217, 54, 0.32); /* yellow */
+}
+div.content-skill-item-name.selection.skill160.selected {
+    background: rgba(255, 217, 54, 0.32); /* yellow */
+}
+div.content-skill-item-name.selection.skill170.selected {
+    background: rgba(255, 51, 44, 0.34);
+}
+div.content-skill-item-name.selection.skill180.selected {
+    background: rgba(255, 217, 54, 0.32); /* yellow */
+}
+div.content-skill-item-name.selection.skill190.selected {
+    background: rgba(0,205,244,0.32); /* blue */
+}
 div.content-skill-item-type {
     background: url(http://dqmsl-search.net/img/tokugiSprite6.png) no-repeat;
     height: 17px;
@@ -184,6 +313,12 @@ div.skill190 {
 }
 div.skill200 {
     background-position: -153px -17px;
+}
+.reset-skills {
+    float: right;
+    display: block;
+    font-size: smaller;
+    cursor: hand;
 }
 div.content-status {
     text-align: right;
@@ -317,4 +452,28 @@ div.content-resist {
 .resist-VERY_WEEK {
     font-weight: bold;
     color: #41B1D0;
+}
+
+/*
+ * skillPicker
+ */
+.skillPicker {
+    padding: 10px;
+    border: 1px solid #AAAAAA;
+    position: fixed;
+    top: 50px;
+    left: 200px;
+    background: #FFFFFF;
+    width: 75%;
+    height: 450px;
+    display: none;
+}
+.skillPickerPanel {
+    margin: 10px 0px 20px 10px;
+    padding: 10px;
+    border: 1px solid #AAAAAA;
+    background: #FFFFFF;
+    width: 95%;
+    height: 370px;
+    overflow: scroll;
 }

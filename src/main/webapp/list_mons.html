@@ -24,6 +24,7 @@
   <body ng-app="partyApp">
 
     <h1>{{'DQMSL PARTY' | translate}}</h1>
+
     <!-- search input section -->
     <div class="search-section" ng-controller="searchMonsterController" data-ng-init="init()">
       <div class="search-input">
@@ -82,8 +83,9 @@
           <div class="content-skill">
             <div class="content-skill-items" ng-repeat="skill in result.skills track by $index">
               <div class="content-skill-item-type skill{{skill.typeId}}" ng-hide="!skill"></div><div class="content-skill-item-name" ng-hide="!skill">{{skill.name}}</div>
-              <div class="content-skill-item-empty" ng-hide="skill">{{'Click to select' | translate}}</div>
+              <div class="content-skill-item-empty" ng-hide="skill" dp-skill-selector ng-click="openSelectSkills(result)">{{'Click to select' | translate}}</div>
             </div>
+            <a class="reset-skills" ng-click="resetSkills(result)">{{'reset skills' | translate}}</a>
           </div>
           <div class="content-status">{{result.hp}}</div>
           <div class="content-status">{{result.mp}}</div>
@@ -109,6 +111,22 @@
           <div class="content-resist resist-{{result.resist['INBREATH']}}">{{result.resist['INBREATH'] | translate}}</div>
         </div>
       </div>
+
+      <!-- skillPicker -->
+      <div class="skillPicker">
+         <div class="skillPickerPanel">
+             <div ng-repeat="type in availableSkills">
+                <div class="content-skill-item-type skill{{type.id}}" /></div><div class="content-skill-item-name">{{type.name}}</div>
+                <div>
+                <div class="content-skill-item-name selection skill{{type.id}}" ng-repeat="skill in type.skills" ng-click="selectSkill(skill)" ng-class="{'selected': skill.selected}">{{skill.name}}</div>
+                </div>
+             </div>
+         </div>
+         <a class="btn" ng-click="confirmSelectSkills(result, skills)">{{'OK' | translate}}</a>
+         <a class="btn" ng-click="cancelSelectSkills()">{{'Cancel' | translate}}</a>
+      </div>
+
+    <!-- end of search section -->
     </div>
 
     <!-- ranch -->

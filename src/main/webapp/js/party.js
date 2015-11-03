@@ -27,6 +27,41 @@ Mon.resists = {
     ABSORB: 8,
 };
 
+Mon.prototype.emptySkillCount = function() {
+    return _.filter(this.skills, function(s) {
+        return !s || !s.fixed;
+    }).length;
+}
+
+Mon.prototype.addNewSkills = function(skills) {
+    if (!skills || !skills.length || skills.length <= 0) {
+        return;
+    }
+
+    var n = 0;
+    for (var i = 0; i < 4; i++) {
+        var s = this.skills[i];
+        if (s && s.fixed) {
+            continue;
+        }
+        if (n >= skills.length) {
+            break;
+        }
+        this.skills[i] = skills[n];
+        this.skills[i].fixed = false;
+        n++;
+    }
+}
+
+Mon.prototype.resetSkills = function() {
+    for (var i = 0; i < this.skills.length; i++) {
+        var s = this.skills[i];
+        if (s && !s.fixed) {
+            this.skills[i] = null;
+        }
+    }
+}
+
 Mon.prototype.withStars = function(stars) {
     this.stars = stars ? parseInt(stars) : 0;
     this.hp = this.starup(this.original.hp, stars);
@@ -85,6 +120,7 @@ Mon.parsePartyFetchJson = function(json) {
     // formatting skills
     r.skills = [];
     _.each(json.skills, function(s, index) {
+        // ignore something like 'type' in response
         if (!s.name) {
             return;
         }
@@ -94,10 +130,32 @@ Mon.parsePartyFetchJson = function(json) {
     return new Mon(r);
 };
 
-function Mobi(mon, stars) {
-    this.stars = stars ? 0 : stars;
-    this.mon = mon;
-}
+Mon.parseSkillTypes = function(skillTypesJson, skillsJson) {
+    var skills = [];
+    for (var id in skillsJson) {
+        skills.push({id: id, name: skillsJson[id]});
+    }
+
+    var types = [];
+    for (var id in skillTypesJson) {
+        types.push({
+            id: id,
+            name: skillTypesJson[id],
+            skills: _.filter(skills, function(s) {
+                if ((id.length === 2 && s.id.length === 4) ||
+                    (id.length === 3 && s.id.length === 5)) {
+                    if (s.id.startsWith(id)) {
+                        s.typeId = id;
+                        s.typeName = skillTypesJson[id];
+                        return true;
+                    }
+                }
+                return false;
+            })
+        });
+    }
+    return types;
+};
 
 var app = angular.module('partyApp', ['pascalprecht.translate'])
     .config(function($translateProvider) {
@@ -122,6 +180,14 @@ var app = angular.module('partyApp', ['pascalprecht.translate'])
             });
         };
     })
+    .directive('dpSkillSelector', function() {
+        // TODO: using link, and scope.watch?
+        return function(scope, element, attrs) {
+            element.click(function() {
+                $('.skillPicker').show();
+            });
+        };
+    })
     .service('partyService', function() {
         this.monsterFromPartyFetchJson = function(json) {
             var r = new Mon(json);
@@ -130,10 +196,21 @@ var app = angular.module('partyApp', ['pascalprecht.translate'])
         this.search = function(expr) {
             var service = this;
             var dfd = $.Deferred();
+
+            var no, stars, skillIds;
             // parse search string
-            var g = expr = expr.split('[');
-            var no = g[0];
-            var stars = g[1] ? g[1].replace(']', '') : 0;
+            var split = expr.split('(');
+            if (split[1]) {
+                skillIds = split[1].replace(')', '').split('|');
+            }
+
+            split = split[0].split('[');
+            if (split[1]) {
+                stars = split[1].replace(']', '');
+            }
+
+            no = split[0];
+
             // TODO: angularjs way to fetch?
             $.ajax({
                 url: 'https://raw.githubusercontent.com/morelchang/dqmsl-party/master/data/monster-' + no + '.json',
@@ -141,6 +218,17 @@ var app = angular.module('partyApp', ['pascalprecht.translate'])
             })
             .done(function(data) {
                 var mon = Mon.parsePartyFetchJson(data);
+                var newSkills = [];
+                _.each(skillIds, function(id) {
+                    _.each(service.skillTypes, function(type) {
+                        _.each(type.skills, function(skill) {
+                            if (skill.id === id) {
+                                newSkills.push(skill);
+                            }
+                        });
+                    });
+                });
+                mon.addNewSkills(newSkills);
                 dfd.resolve(mon.withStars(stars));
             })
             .fail(function(jqXHR, textStatus) {
@@ -171,14 +259,53 @@ var app = angular.module('partyApp', ['pascalprecht.translate'])
             });
             return dfd;
         };
+        this.listSkills = function() {
+            var dfd = $.Deferred();
+            if (this.skillTypes) {
+                dfd.resolve(this.skillTypes);
+                return dfd;
+            }
+
+            var service = this;
+            $.ajax({
+                url: 'https://raw.githubusercontent.com/morelchang/dqmsl-party/master/data/skillTypes.json',
+                dataType: 'json',
+                async: false
+            }).done(function(skillTypesData) {
+                $.ajax({
+                    url: 'https://raw.githubusercontent.com/morelchang/dqmsl-party/master/data/skills.json',
+                    dataType: 'json',
+                    async: false,
+                }).done(function(skillsData) {
+                    var skillTypes = Mon.parseSkillTypes(skillTypesData, skillsData);
+                    // cached in service
+                    service.skillTypes = skillTypes;
+                    dfd.resolve(skillTypes);
+                })
+            }).fail(function(jqXHR, textStatus) {
+                console.log('failed to get data: ' + jqXHR.responseText);
+                dfd.reject(jqXHR, textStatus);
+            });
+            return dfd;
+        };
+
+        this.listSkills();
     })
     .controller('searchMonsterController', ['$scope', 'partyService', '$translate', function($scope, partyService, $translate) {
         $scope.init = function() {
+            // search immediately if search string in hash of url
             var initSearchKey = decodeURIComponent(window.location.hash.substr(1));
             if (initSearchKey) {
                 this.searchNo = initSearchKey;
                 this.searchMultiple();
             }
+
+            // load skillTypes
+            partyService.listSkills().done(function(skills) {
+                $scope.availableSkills = skills;
+                // TODO: scope applying happens here?
+                //$scope.$apply();
+            });
         };
         $scope.searchMultiple = function() {
             // cleanup
@@ -263,7 +390,14 @@ var app = angular.module('partyApp', ['pascalprecht.translate'])
             // make result into save format
             var save = '';
             _.each(this.results, function(r) {
-                save += r.no + (r.stars > 0 ? '[' + r.stars + '],' : ',');
+                save += r.no + (r.stars > 0 ? '[' + r.stars + ']' : '');
+                save += '(' + _.compact(_.map(r.skills, function(s) {
+                    if (s && !s.fixed) {
+                        return s.id;
+                    }
+                    return '';
+                })).join('|') + ')';
+                save += ',';
             });
             save = save.substring(0, save.length - 1);
             
@@ -315,6 +449,49 @@ var app = angular.module('partyApp', ['pascalprecht.translate'])
             } else {
                 $.cookie(key, value);
             }
+        };
+
+        $scope.openSelectSkills = function(mon) {
+            // TODO: scope problem for scope.selectSkill()?
+            $scope.currentSelectSkillMon = mon;
+            $scope.selectedSkills = [];
+        };
+        $scope.resetSkills = function(mon) {
+            mon.resetSkills();
+        };
+        $scope.selectSkill = function(skill) {
+            // cancel select
+            if (skill.selected) {
+                skill.selected = false;
+                $scope.selectedSkills = _.without($scope.selectedSkills, _.findWhere($scope.selectedSkills, {id: skill.id}));
+                return;
+            }
+
+            var mon = this.currentSelectSkillMon;
+            if ($scope.selectedSkills.length >= mon.emptySkillCount()) {
+                // TODO: warning message
+                return;
+            }
+            skill.selected = true;
+            $scope.selectedSkills.push(skill);
+        };
+        $scope.confirmSelectSkills = function() {
+            $('.skillPicker').hide();
+            // apply skills to mon
+            var mon = $scope.currentSelectSkillMon;
+            mon.addNewSkills($scope.selectedSkills);
+
+            // clear selection
+            this.cancelSelectSkills();
+        };
+        $scope.cancelSelectSkills = function() {
+            $('.skillPicker').hide();
+            _.each($scope.availableSkills, function(type) {
+                _.each(type.skills, function(skill) {
+                    skill.selected = false;
+                });
+            });
+            $scope.currentSelectSkillMon = null;
         };
     }])
     .controller('ranchController', ['$scope', function($s) {
