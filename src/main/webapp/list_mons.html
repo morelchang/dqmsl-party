@@ -28,8 +28,8 @@
     <!-- search input section -->
     <div class="search-section" ng-controller="searchMonsterController" data-ng-init="init()">
       <div class="search-input">
-        {{'Monster No:' | translate}} <input type="text" value="monster number" ng-model="searchNo" ng-enter="searchMultiple()" />
-        <a class="btn" ng-click="searchMultiple()">{{'Search' | translate}}</a>
+        {{'Monster No:' | translate}} <input type="text" value="monster number" ng-model="searchNo" ng-enter="hashToSearch()" />
+        <a class="btn" ng-click="hashToSearch()">{{'Search' | translate}}</a>
         <a class="btn" ng-click="saveResult()">{{'Save Result' | translate}}</a>
         <a class="btn" ng-click="loadSaved()">{{'Load Saved' | translate}}</a>
         <a class="btn" ng-click="loadSaved()">{{'Add To Saved' | translate}}</a>

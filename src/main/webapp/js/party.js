@@ -307,6 +307,11 @@ var app = angular.module('partyApp', ['pascalprecht.translate'])
                 //$scope.$apply();
             });
         };
+        $scope.hashToSearch = function() {
+            // TODO: angularjs provide routing function?
+            window.location.hash = encodeURIComponent(this.searchNo);
+            this.searchMultiple();
+        };
         $scope.searchMultiple = function() {
             // cleanup
             this.error = '';
