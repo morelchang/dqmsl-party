@@ -39,7 +39,7 @@
       <div class="search-error" ng-hide="!error">{{error}}</div>
 
       <!-- search result -->
-      <div class="search-result table" ng-hide="!results">
+      <div class="search-result table" ng-hide="!results || results.length === 0">
         <div class="table-tr">
           <div class="header-icon"></div>
           <div class="header-no"><a href="#" ng-class="{'sorting': sortBy === 'no'   , 'asc': sortByAsc}" ng-click="sort('no')">{{'NO' | translate}}</a></div>
@@ -72,6 +72,9 @@
             <a href="http://dqmsl-search.net/monster/detail?no={{result.no}}" target="blank">
               <div ng-class="{'star-icon0': result.stars <= 0, 'star-icon1': result.stars === 1, 'star-icon2': result.stars === 2, 'star-icon3': result.stars === 3, 'star-icon4': result.stars === 4}"><img class="monster-icon-small" ng-src="{{result.icon}}"></div>
             </a>
+            <div class="delete-icon-right-wrap">
+              <div class="delete-icon" ng-click="removeMonster(result)"></div>
+            </div>
           </div>
           <div class="content-no">
               {{'No:' | translate}} {{result.no}}<br/>

@@ -391,6 +391,12 @@ var app = angular.module('partyApp', ['pascalprecht.translate'])
                 return 0;
             });
         };
+        $scope.removeMonster = function(mon) {
+            $scope.results = _.without($scope.results, _.findWhere(this.results, mon));
+            $translate('remove success:').then(function(t) {
+                $scope.error = t + newMons.length;
+            });
+        };
         $scope._serializeMon = function(mon) {
             var r = mon;
             var save = '';
