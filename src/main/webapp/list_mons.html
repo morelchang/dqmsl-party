@@ -32,7 +32,7 @@
         <a class="btn" ng-click="hashToSearch()">{{'Search' | translate}}</a>
         <a class="btn" ng-click="saveResult()">{{'Save Result' | translate}}</a>
         <a class="btn" ng-click="loadSaved()">{{'Load Saved' | translate}}</a>
-        <a class="btn" ng-click="loadSaved()">{{'Add To Saved' | translate}}</a>
+        <a class="btn" ng-click="addToSaved()">{{'Add To Saved' | translate}}</a>
       </div>
 
       <!-- search error -->
@@ -69,7 +69,9 @@
         </div>
         <div class="table-tr" ng-repeat="result in results">
           <div>
-            <div ng-class="{'star-icon0': result.stars <= 0, 'star-icon1': result.stars === 1, 'star-icon2': result.stars === 2, 'star-icon3': result.stars === 3, 'star-icon4': result.stars === 4}"><img class="monster-icon-small" ng-src="{{result.icon}}"></div>
+            <a href="http://dqmsl-search.net/monster/detail?no={{result.no}}" target="blank">
+              <div ng-class="{'star-icon0': result.stars <= 0, 'star-icon1': result.stars === 1, 'star-icon2': result.stars === 2, 'star-icon3': result.stars === 3, 'star-icon4': result.stars === 4}"><img class="monster-icon-small" ng-src="{{result.icon}}"></div>
+            </a>
           </div>
           <div class="content-no">
               {{'No:' | translate}} {{result.no}}<br/>

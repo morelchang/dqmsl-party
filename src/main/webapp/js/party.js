@@ -391,20 +391,31 @@ var app = angular.module('partyApp', ['pascalprecht.translate'])
                 return 0;
             });
         };
-        $scope.saveResult = function() {
-            // make result into save format
+        $scope._serializeMon = function(mon) {
+            var r = mon;
             var save = '';
-            _.each(this.results, function(r) {
-                save += r.no + (r.stars > 0 ? '[' + r.stars + ']' : '');
-                save += '(' + _.compact(_.map(r.skills, function(s) {
-                    if (s && !s.fixed) {
-                        return s.id;
-                    }
-                    return '';
-                })).join('|') + ')';
+            save += r.no + (r.stars > 0 ? '[' + r.stars + ']' : '');
+            save += '(' + _.compact(_.map(r.skills, function(s) {
+                if (s && !s.fixed) {
+                    return s.id;
+                }
+                return '';
+            })).join('|') + ')';
+            return save;
+        };
+        $scope._serializeMons = function(mons) {
+            var results = mons;
+            var save = '';
+            _.each(results, function(r) {
+                save += $scope._serializeMon(r);
                 save += ',';
             });
             save = save.substring(0, save.length - 1);
+            return save;
+        };
+        $scope.saveResult = function() {
+            // make result into save format
+            var save = this._serializeMons(this.results);
             
             // persist to cookie
             this.persist('save', save);
@@ -419,16 +430,21 @@ var app = angular.module('partyApp', ['pascalprecht.translate'])
             this.searchMultiple();
         };
         $scope.addToSaved = function() {
-            var newMons = this.results;
+            var persisted = this._serializeMons(this.results);
 
             // read from json data
             var persistRanch = this.readPersist('save');
-            partyService.searchMultiple(persistRanch)
+            if (persistRanch) {
+                persisted = persistRanch + ',' + persisted;
+            }
+            this.persist('save', persisted);
+
+            // load for all saved
+            partyService.searchMultiple(persisted)
                 .done(function(mons) {
                     // render to search result section
-                    $scope.results = _.extend(mons, newMons);
+                    $scope.results = mons;
                     $scope.sort();
-                    $scope.saveResult();
 
                     $translate('added success:').then(function(t) {
                         $scope.error = t + newMons.length;
