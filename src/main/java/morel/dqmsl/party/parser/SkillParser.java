@@ -13,6 +13,7 @@ public class SkillParser {
 		Elements skills = doc.select("span.skillButton");
 		Map<String, String> result = new TreeMap<String, String>();
 		for (Element e : skills) {
+			System.out.println("fetch skill:" + e.attr("code") + ", " + e.text());
 			result.put(e.attr("code"), e.text());
 		}
 		return result;

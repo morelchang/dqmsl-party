@@ -13,6 +13,7 @@ public class CharacteristcsParser {
 		TreeMap<String, String> result = new TreeMap<String, String>();
 		Elements elements = doc.select("select#tks0 option");
 		for (Element e : elements) {
+			System.out.println("fetch characteristics:" + e.attr("code") + ", " + e.text());
 			result.put(e.attr("value"), e.text());
 		}
 		return result;
